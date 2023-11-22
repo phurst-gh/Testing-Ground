@@ -1,0 +1,26 @@
+### react ###
+.DS_*
+*.log
+logs
+**/*.backup.*
+**/*.back.*
+
+node_modules
+bower_components
+
+*.sublime*
+
+psd
+thumb
+sketch
+
+#Distribution directories
+dist
+dist-ssr
+*.local
+
+### macOS ###
+# General
+.DS_Store
+.AppleDouble
+.LSOverride
