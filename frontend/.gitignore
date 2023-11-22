@@ -1,26 +1,28 @@
-### react ###
+# react
 .DS_*
 *.log
 logs
 **/*.backup.*
 **/*.back.*
 
-node_modules
-bower_components
+# Node.js
+node_modules/
 
-*.sublime*
+# Dependency directories
+yarn.lock
 
-psd
-thumb
-sketch
-
-#Distribution directories
+# Distribution directories
 dist
 dist-ssr
 *.local
 
-### macOS ###
-# General
-.DS_Store
+# Build files
+dist/
+
+# Vite cache
+.vite/
+
+# Mac-specific files
 .AppleDouble
+.DS_Store
 .LSOverride
