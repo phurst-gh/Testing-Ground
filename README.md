@@ -1,5 +1,3 @@
-# budget_calculator
-
 ## Description
 
 ## Technologies
