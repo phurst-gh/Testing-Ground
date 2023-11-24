@@ -1,12 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import RegisterForm from './components/forms/Register';
 
 const App = () => {
-  const [count, setCount] = useState(0);
-  const [data, setData] = useState(0);
+  const [data, setData] = useState();
 
   useEffect(() => {
     axios.get('http://localhost:3001/')
@@ -20,27 +17,13 @@ const App = () => {
 
   return (
     <>
+      <h1>Budget Calculator</h1>
       <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+        <p>Is connected to Node backend? {data ? 'True.' : 'False.'}</p>
+        {data && <p>The data supplied is: {data}</p>  }
       </div>
-      <h1>Vite + React</h1>
-      <h1>Data: {data}</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+
+      <RegisterForm />
     </>
   )
 }
