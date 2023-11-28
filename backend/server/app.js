@@ -1,12 +1,26 @@
-const express = require('express');
-// const cors = require('cors');
+const express = require('express')
+const expressValidator = require('express-validator');
+const cors = require('cors');
 
 // Create our Express app
 const app = express();
+
 //Import routes
 const routes = require('../routes/index');
 
-// app.use(cors());
+// Takes the raw requests and turns them into usable properties on req.body
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+// Exposes a bunch of methods for validating data on the req
+app.use(expressValidator());
+
+const corsOptions = {
+  origin: 'http://localhost:3000', // Frontend URL
+  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+  credentials: true, // Allow cookies and credentials
+};
+app.use(cors(corsOptions));
 
 // After any potential middleware (auth etc) we call our routes
 app.use('/', routes);

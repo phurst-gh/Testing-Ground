@@ -19,7 +19,7 @@ const App = () => {
     <>
       <h1>Budget Calculator</h1>
       <div>
-        <p>Is connected to Node backend? {data ? 'True.' : 'False.'}</p>
+        <p>Is connected to Node? {data ? 'True.' : 'False.'}</p>
         {data && <p>The data supplied is: {data}</p>  }
       </div>
 

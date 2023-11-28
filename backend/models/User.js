@@ -1,9 +1,10 @@
 const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
 const validator = require('validator');
 const mongodbErrorHandler = require('mongoose-mongodb-errors');
-const passportLocalMongoose = require('password-local-mongoose');
+const passportLocalMongoose = require('passport-local-mongoose');
 
-const userSchema = new mongoose.Schema({
+const userSchema = new Schema({
   firstName: {
     type: String,
     required: 'Please supply a first name',
@@ -25,7 +26,9 @@ const userSchema = new mongoose.Schema({
   },
 });
 
-userSchema.plugin(passportLocalMongoose, { usernamefield: 'email '});
+// Adds fields and methods needed for auth, use email as the login field (rather than username etc)
+userSchema.plugin(passportLocalMongoose, { usernameField: 'email' });
+// Clean error messaging
 userSchema.plugin(mongodbErrorHandler);
 
-module.export = mongoose.model('User', userSchema);
+module.exports = mongoose.model('User', userSchema);

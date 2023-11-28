@@ -9,9 +9,13 @@ router.get('/', (req, res) => {
   console.log('HOME')
   res.json(data);
 });
-// router.get('/', catchErrors(userController.registeration))
 
-router.get('/login', catchErrors(userController.loginForm));
-router.get('/register', catchErrors(userController.registerForm));
+// 1. Validate the data
+// w.d Register the user
+// 3. Log in the user
+router.post('/register',
+  userController.validateRegister,
+  userController.register
+);
 
 module.exports = router;
