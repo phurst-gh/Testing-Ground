@@ -15,8 +15,7 @@ exports.validateRegister = (req, res, next) => {
   req.checkBody('password', 'Password cannot be blank.').notEmpty();
   req.checkBody('passwordConfirm', 'Confirm password cannot be blank.').notEmpty();
   req.checkBody('passwordConfirm', 'Oops! your passwords do not match.').equals(req.body.password);
-  
-  req.sanitizeBody('firstName', 'lastName');
+  // req.sanitizeBody('firstName', 'lastName');
   req.sanitizeBody('email').normalizeEmail({
     remove_dots: false,
     remove_extension: false,
@@ -26,10 +25,12 @@ exports.validateRegister = (req, res, next) => {
   const errors = req.validationErrors()
   if (errors) {
     // Do flash message for error
-    console.log(`An error occured: ${errors}.`);
+    const errMessages = errors.map(err => err.msg);
+    res.status(500).json(errMessages);
+    return;
   }
 
-  next();
+  next(); // If no errors, continue..
 }
 
 exports.register =  async (req, res, next) => {

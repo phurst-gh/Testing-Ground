@@ -26,7 +26,8 @@ const userSchema = new Schema({
   },
 });
 
-// Adds fields and methods needed for auth, use email as the login field (rather than username etc)
+// Simplifies building username and password login with Passport
+// { options } - use email as the login field (defaults to a username field)
 userSchema.plugin(passportLocalMongoose, { usernameField: 'email' });
 // Clean error messaging
 userSchema.plugin(mongodbErrorHandler);
