@@ -3,15 +3,10 @@ const promisify = require('es6-promisify');
 const User = mongoose.model('User');
 
 exports.validateRegister = (req, res, next) => {
-  console.log(req.body);
-  console.log('++++++++++++');
-  console.log('++++++++++++');
-  console.log('++++++++++++');
-  console.log('++++++++++++');
   // Validation methods from ExpressValidator
   req.checkBody('firstName', 'You must supply a first name.').notEmpty();
   req.checkBody('lastName', 'You must supply a last name.').notEmpty();
-  req.checkBody('email', 'You must supply a first name.').notEmpty();
+  req.checkBody('email', 'You must supply an email.').notEmpty();
   req.checkBody('password', 'Password cannot be blank.').notEmpty();
   req.checkBody('passwordConfirm', 'Confirm password cannot be blank.').notEmpty();
   req.checkBody('passwordConfirm', 'Oops! your passwords do not match.').equals(req.body.password);
@@ -23,21 +18,20 @@ exports.validateRegister = (req, res, next) => {
   })
 
   const errors = req.validationErrors()
+  console.log(errors);
+
   if (errors) {
-    // Do flash message for error
+    console.log('Inside validateRegister errors');
     const errMessages = errors.map(err => err.msg);
     res.status(500).json(errMessages);
     return;
   }
 
+  console.log('Inside validateRegister');
   next(); // If no errors, continue..
 }
 
 exports.register =  async (req, res, next) => {
-  console.log(11111111111);
-  console.log(11111111111);
-  console.log(11111111111);
-
   const user = new User({
     email: req.body.email,
     firstName: req.body.firstName,
@@ -46,9 +40,11 @@ exports.register =  async (req, res, next) => {
     passwordConfirm: req.body.passwordConfirm
   });
   
+  // Instead of using User.register (which is a callback based fucntion from passport-local-mongoose) we use..
+  // ..promisify(method-to-promisify, obj-contiaing-method) (package es6-promisify) so that we can keep using async/await
   const registerWithPromise = promisify(User.register, User);
   await registerWithPromise(user, req.body.password);
-  res.send('It worked!!');
-  next();
+  console.log('Inside register');
+  next(); // Continue onto atuhController.js
 }
 

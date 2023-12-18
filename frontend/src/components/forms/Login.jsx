@@ -4,14 +4,11 @@ import axios from "axios";
 import FlashError from "../flashes/FlashError";
 
 const initialState = {
-  firstName: "",
-  lastName: "",
   email: "",
-  password: "",
-  passwordConfirm: "",
+  password: ""
 };
 
-const RegisterForm = () => {
+const LoginForm = () => {
   const [formData, setFormData] = useState(initialState);
   const [errData, setErrData] = useState();
 
@@ -27,15 +24,16 @@ const RegisterForm = () => {
     e.preventDefault();
 
     axios
-      .post("http://localhost:3001/register", formData)
+      .post("http://localhost:3001/login", formData)
       .then(() => {
         console.log("Submit success!!");
         setFormData(initialState);
       })
       .catch((error) => {
         console.log("Submit fail..");
-        console.log(error);
-        setErrData(error);
+        const errorResponseData = error.response.data;
+        console.log('errorResponseData', errorResponseData);
+        setErrData(errorResponseData);
       });
   };
 
@@ -44,28 +42,12 @@ const RegisterForm = () => {
       {/* {errData?.map((message, index) => (
         <FlashError key={index} message={message} />
       ))} */}
+      {errData && errData}
 
       <div>
-        <h3>Register</h3>
+        <h3>Login</h3>
 
         <form onSubmit={handleSubmit}>
-          <label htmlFor="firstName">First Name</label>
-          <input
-            type="text"
-            name="firstName"
-            value={formData.firstName}
-            onChange={handleInputChange}
-            // required
-          />
-          <label htmlFor="lastName">Last Name</label>
-          <input
-            type="text"
-            name="lastName"
-            value={formData.lastName}
-            onChange={handleInputChange}
-            // required
-          />
-
           <label htmlFor="email">Email</label>
           <input
             type="text"
@@ -83,20 +65,11 @@ const RegisterForm = () => {
             onChange={handleInputChange}
             // required
           />
-
-          <label htmlFor="password-confirm">Confirm Password</label>
-          <input
-            type="password"
-            name="passwordConfirm"
-            value={formData.passwordConfirm}
-            onChange={handleInputChange}
-            // required
-          />
-          <button type="submit">Register</button>
+          <button type="submit">Login</button>
         </form>
       </div>
     </>
   );
 };
 
-export default RegisterForm;
+export default LoginForm;

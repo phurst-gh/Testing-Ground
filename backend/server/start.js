@@ -14,7 +14,7 @@ require('../models/User');
 
 // Start the app!!
 const app = require('./app');
-const PORT = process.env.PORT || 7777;
+const PORT = process.env.PORT || 3001;
 app.set('port', PORT);
 app.listen(PORT, () => {
   console.log(`Express running → PORT ${PORT}`);
