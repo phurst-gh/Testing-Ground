@@ -45,6 +45,7 @@ exports.register =  async (req, res, next) => {
   const registerWithPromise = promisify(User.register, User);
   await registerWithPromise(user, req.body.password);
   console.log('Inside register');
+  res.send('it worked!');
   next(); // Continue onto atuhController.js
 }
 

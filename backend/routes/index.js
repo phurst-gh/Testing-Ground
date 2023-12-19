@@ -6,8 +6,7 @@ const authController = require('../controllers/authController');
 const { catchErrors } = require('../handlers/errorHandlers');
 
 router.get('/', (req, res) => {
-  const data = { message: 'HOME!' };
-  console.log('HOME')
+  const data = { message: 'connected!' };
   res.json(data);
 });
 
