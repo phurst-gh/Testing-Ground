@@ -4,6 +4,7 @@ const cors = require('cors');
 const passport = require("passport");
 const MongoStore = require("connect-mongo");
 const session = require('express-session');
+const errorHandlers = require("../handlers/errorHandlers");
 require('../handlers/passport');
 
 // Create our Express app
@@ -45,6 +46,9 @@ app.use(cors(corsOptions));
 
 // After any potential middleware we call our routes
 app.use('/', routes);
+
+// If that above routes didnt work, we 404 them and forward to error handler
+// app.use(errorHandlers.notFound);
 
 // We export it so we can start the site in server/index.js
 module.exports = app;

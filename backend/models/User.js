@@ -32,5 +32,5 @@ const userSchema = new Schema({
 userSchema.plugin(passportLocalMongoose, { usernameField: 'email' });
 // Clean error messaging
 userSchema.plugin(mongodbErrorHandler);
-
+// Build mongoose USer model, attaching more methods such as findone()
 module.exports = mongoose.model('User', userSchema);

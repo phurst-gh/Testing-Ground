@@ -9,8 +9,16 @@ exports.loginPage = (req, res) => {
 // ..this local strategy will add the User obj on each request.
 exports.login = passport.authenticate('local', {
   failureMessage: 'Login failed.',
-  successMessage: 'Logged in!'
-})
+  successMessage: 'Logged in!',
+  successRedirect: '/isLoggedIn'
+});
+
+exports.isLoggedIn = (req, res, next) => {
+  if (req.isAuthenticated()) {
+    next(); // They are logged in!
+    return;
+  }
+};
 
 exports.logout = (req, res) => {
   req.logout();

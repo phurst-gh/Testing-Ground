@@ -13,6 +13,7 @@ router.get('/', (req, res) => {
 // Authentication
 router.post('/register',
   userController.validateRegister,
+  userController.emailExists,
   userController.register
   // authController.login
 );
@@ -21,5 +22,9 @@ router.get('/login', authController.loginPage);
 router.post('/login', authController.login);
 
 router.get('/logout', authController.logout);
+
+router.get('/isLoggedIn', authController.isLoggedIn, (req, res) => {
+  res.json('User logged in!')
+});
 
 module.exports = router;

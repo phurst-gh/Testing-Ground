@@ -26,11 +26,11 @@ const LoginForm = () => {
     axios
       .post("http://localhost:3001/login", formData)
       .then(() => {
-        console.log("Submit success!!");
+        console.log("Login success!!");
         setFormData(initialState);
       })
       .catch((error) => {
-        console.log("Submit fail..");
+        console.log("Login fail..");
         const errorResponseData = error.response.data;
         console.log('errorResponseData', errorResponseData);
         setErrData(errorResponseData);
