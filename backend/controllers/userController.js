@@ -4,22 +4,24 @@ const User = mongoose.model('User');
 
 exports.emailExists = async (req, res, next) => {
   const { email } = req.body;
-console.log('Inside emailExists');
+  
   try {
     const existingUser = await User.findOne({ email });
 
     if (existingUser) {
-      console.log('Inside emailExists USER EXISTS');
+      console.log('USER EXISTS');
       res.status(400).json({ error: 'Email already exists' });
     } else {
       // Email available
-      console.log('Inside emailExists USER DOES NOT EXISTS');
+      console.log('USER DOES NOT EXISTS');
       next();
     }
   } catch (error) {
-    console.log('Inside emailExists CATCH');
     console.error(`Error checking email existence: ${error.message}`);
-    res.status(500).json({ error: 'Internal Server Error' });
+    res.status(500).json({
+      error: 'Internal Server Error',
+      message: error.message
+    });
   }
 };
 
@@ -42,13 +44,11 @@ exports.validateRegister = (req, res, next) => {
   console.log(errors);
 
   if (errors) {
-    console.log('Inside validateRegister errors');
     const errMessages = errors.map(err => err.msg);
     res.status(500).json(errMessages);
     return;
   }
 
-  console.log('Inside validateRegister');
   next(); // If no errors, continue..
 }
 
@@ -65,8 +65,7 @@ exports.register =  async (req, res, next) => {
   // ..promisify(method-to-promisify, obj-contiaing-method) from es6-promisify so that we can keep using async/await
   const registerWithPromise = promisify(User.register, User);
   await registerWithPromise(user, req.body.password);
-  console.log('Inside register');
-  res.send('it worked!');
+  // res.send('it worked!'); // Removing this is causing an error to be returned during registration, although it still registers the user
   next(); // Continue onto authController.js
 }
 

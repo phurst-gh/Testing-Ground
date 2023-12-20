@@ -48,7 +48,7 @@ app.use(cors(corsOptions));
 app.use('/', routes);
 
 // If that above routes didnt work, we 404 them and forward to error handler
-// app.use(errorHandlers.notFound);
+app.use(errorHandlers.notFound);
 
 // We export it so we can start the site in server/index.js
 module.exports = app;
