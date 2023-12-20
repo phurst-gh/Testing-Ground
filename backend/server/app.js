@@ -4,6 +4,7 @@ const cors = require('cors');
 const passport = require("passport");
 const MongoStore = require("connect-mongo");
 const session = require('express-session');
+require('../handlers/passport');
 
 // Create our Express app
 const app = express();
@@ -22,14 +23,17 @@ app.use(expressValidator());
 // This keeps users logged in and allows us to send flash messages
 app.use(session({
   secret: process.env.SECRET,
-  key: process.env.KEY,
   resave: false,
   saveUninitialized: false,
   store: new MongoStore({ mongoUrl: process.env.DATABASE })
 }));
 
 // Passport JS is what we use to handle our logins
+// initialize creates the passport object on the request and defines where the..
+// ..shorthand user is located on the req object (defaults to req.user)
 app.use(passport.initialize());
+// session sets up calls the serialize && deserialize methods and interacts with..
+// ..express-session. Must come after app.use("express-session")
 app.use(passport.session());
 
 const corsOptions = {
@@ -39,7 +43,7 @@ const corsOptions = {
 };
 app.use(cors(corsOptions));
 
-// After any potential middleware (auth etc) we call our routes
+// After any potential middleware we call our routes
 app.use('/', routes);
 
 // We export it so we can start the site in server/index.js

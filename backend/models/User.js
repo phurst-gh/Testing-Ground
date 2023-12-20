@@ -26,6 +26,7 @@ const userSchema = new Schema({
   },
 });
 
+// Apply the passport-local-mongoose plugin to the user schema (adds methods like serializeUser)
 // Simplifies building username and password login with Passport
 // { options } - use email as the login field (defaults to a username field)
 userSchema.plugin(passportLocalMongoose, { usernameField: 'email' });

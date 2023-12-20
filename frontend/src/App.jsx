@@ -1,31 +1,20 @@
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
-import RegisterForm from './components/forms/Register';
+import React from 'react';
+// import { Route, Switch } from 'react-router-dom';
 
-const App = () => {
-  const [data, setData] = useState();
+import Home from './pages/Home';
 
-  useEffect(() => {
-    axios.get('http://localhost:3001/')
-      .then(response => {
-        setData(response.data.message);
-      })
-      .catch(error => {
-        console.error(error);
-      });
-  }, []);
-
-  return (
-    <>
-      <h1>Budget Calculator</h1>
-      <div>
-        <p>Is connected to Node? {data ? 'True.' : 'False.'}</p>
-        {data && <p>The data supplied is: {data}</p>  }
-      </div>
-
-      <RegisterForm />
-    </>
-  )
-}
+const App = () => (
+  // <Router>
+  //   <Switch>
+  //     <Route path="/" element={<Home />} />
+  //     <Route path="/login" element={<Login />} />
+  //     {/* <Route path="/Register" element={<Register />} />
+  //     <Route path="/Unauthorised" element={<Unauthorised />} />
+  //     <Route path="/Error" element={<Error />} />
+  //     <Route path="*" element={<NoMatch />} /> */}
+  //   </Switch>
+  // </Router>
+  <Home />
+)
 
 export default App
