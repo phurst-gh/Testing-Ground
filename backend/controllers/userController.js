@@ -65,7 +65,7 @@ exports.register =  async (req, res, next) => {
   // ..promisify(method-to-promisify, obj-contiaing-method) from es6-promisify so that we can keep using async/await
   const registerWithPromise = promisify(User.register, User);
   await registerWithPromise(user, req.body.password);
-  // res.send('it worked!'); // Removing this is causing an error to be returned during registration, although it still registers the user
+  res.send('it worked!'); // Removing this is causing an error to be returned during registration, although it still registers the user
   next(); // Continue onto authController.js
 }
 

@@ -40,5 +40,5 @@ exports.checkValidationErrors = (err, req, res, next) => {
   const errMessages = err.map(err => err.msg);
   console.log(err)
   res.status(500).json(errMessages);
-  return;
+  next();
 };
