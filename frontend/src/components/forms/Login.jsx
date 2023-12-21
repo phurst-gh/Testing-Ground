@@ -65,6 +65,7 @@ const LoginForm = () => {
             onChange={handleInputChange}
             // required
           />
+
           <button type="submit">Login</button>
         </form>
       </div>
