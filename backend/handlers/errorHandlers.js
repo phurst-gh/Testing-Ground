@@ -27,18 +27,3 @@ exports.notFound = (req, res, next) => {
   err.status = 404;
   next(err);
 };
-
-/*
-  MongoDB Validation Error Handler
-
-  Detect if there are mongodb validation errors that we can nicely show via flash messages
-*/
-
-exports.checkValidationErrors = (err, req, res, next) => {
-  if (!err.errors) return next(err);
-  // validation errors look like
-  const errMessages = err.map(err => err.msg);
-  console.log(err)
-  res.status(500).json(errMessages);
-  next();
-};
