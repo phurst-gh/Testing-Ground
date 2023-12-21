@@ -14,8 +14,8 @@ router.get('/', (req, res) => {
 router.post('/register',
   userController.validateRegister,
   userController.emailExists,
-  userController.register
-  // authController.login
+  userController.register,
+  authController.login
 );
 
 router.get('/login', authController.loginPage);
