@@ -7,11 +7,31 @@ exports.loginPage = (req, res) => {
 // passport uses strategies, the local strategy is commonly used for username and password..
 // ..authentication. Passport must be configured before using any strategy (handlers/passport.js)..
 // ..this local strategy will add the User obj on each request.
-exports.login = passport.authenticate('local', {
-  failureMessage: 'Login failed.',
-  successMessage: 'Logged in!',
-  successRedirect: '/isLoggedIn'
-});
+exports.login = (req, res, next) => {
+  passport.authenticate('local', (err, user, info) => {
+    if (err) {
+      return res.status(500).json({ message: `Error with authentication ${message}.`});
+    }
+  
+    if (!user) {
+      // User should be attachted, authentication failed
+      return res.status(401).json({ message: 'Authentication failed' });
+    }
+  
+    // Auth successful, use req.login to establish a session and log the user in
+    req.login(user, (loginErr) => {
+      if (loginErr) {
+        return res.status(500).json({ message: `Error with login ${loginErr}.`});
+      }
+  
+      // Set a custom message in the session (optional)
+      req.session.authMessage = 'Login successful!';
+  
+      return res.status(200).json({ message: 'Login successful!'});
+    })
+  })(req, res, next);
+};
+
 
 exports.isLoggedIn = (req, res, next) => {
   if (req.isAuthenticated()) {
@@ -33,4 +53,4 @@ exports.isLoggedIn = (req, res, next) => {
   }
 
   res.json('User not authorised.');
-}
+};
