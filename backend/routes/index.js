@@ -23,8 +23,6 @@ router.post('/login', authController.login);
 
 router.get('/logout', authController.logout);
 
-router.get('/isLoggedIn', authController.isLoggedIn, (req, res) => {
-  res.json('User logged in!')
-});
+router.get('/api/protected-route', authController.isAuthenticated);
 
 module.exports = router;
