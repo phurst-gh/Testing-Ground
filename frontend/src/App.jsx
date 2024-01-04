@@ -1,20 +1,12 @@
-import React from 'react';
-// import { Route, Switch } from 'react-router-dom';
+import React from "react";
 
-import Home from './pages/Home';
+import { AuthProvider } from "./components/context/AuthContext";
+import Routes from "./pages/Routes";
 
 const App = () => (
-  // <Router>
-  //   <Switch>
-  //     <Route path="/" element={<Home />} />
-  //     <Route path="/login" element={<Login />} />
-  //     {/* <Route path="/Register" element={<Register />} />
-  //     <Route path="/Unauthorised" element={<Unauthorised />} />
-  //     <Route path="/Error" element={<Error />} />
-  //     <Route path="*" element={<NoMatch />} /> */}
-  //   </Switch>
-  // </Router>
-  <Home />
-)
+  <AuthProvider>
+    <Routes />
+  </AuthProvider>
+);
 
-export default App
+export default App;

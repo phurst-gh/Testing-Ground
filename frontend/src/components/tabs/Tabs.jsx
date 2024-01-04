@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 
 import FlashError from "../flashes/FlashError";
@@ -19,8 +19,8 @@ const TabButtonStyled = styled.button`
   padding: 10px;
   margin-right: 10px;
   border: 1px solid #ccc;
-  background-color: ${({ isActive }) => (isActive ? 'white' : 'lightgrey')};
-  font-weight: ${({ isActive }) => (isActive ? 'bold' : 'normal')};
+  /* background-color: ${({ active }) => (active ? 'white' : 'lightgrey')};
+  font-weight: ${({ active }) => (active ? 'bold' : 'normal')}; */
 `;
 
 const TabPanelStyled = styled.div`
@@ -28,9 +28,9 @@ const TabPanelStyled = styled.div`
   padding: 10px;
 `;
 
-const TabButton = ({ label, onClick, isActive, disabled }) => {
+const TabButton = ({ label, onClick, disabled }) => {
 return (
-  <TabButtonStyled onClick={onClick} isActive={isActive} disabled={disabled}>
+  <TabButtonStyled onClick={onClick} disabled={disabled}>
     {label}
   </TabButtonStyled>
 )};
@@ -40,11 +40,16 @@ const TabPanel = ({ children }) => {
 };
 
 const TabComponent = ({ tabs }) => {
-  const [activeTab, setActiveTab] = useState('register');
+  const [activeLabel, setActiveLabel] = useState();
 
-  const handleTabClick = type => {
-    setActiveTab(type);
+  const handleTabClick = label => {
+    setActiveLabel(label);
   };
+
+  useEffect(() => {
+    setActiveLabel(tabs[0].label);
+  }, [tabs]);
+
 
   return (
     <FormWrapper>
@@ -56,11 +61,10 @@ const TabComponent = ({ tabs }) => {
                 key={i}
                 label={tab.label}
                 onClick={() => handleTabClick(tab.label)}
-                isActive={tab.label === activeTab}
               />
             ))}
           </div>
-          <TabPanel>{tabs.find(tab => tab.label === activeTab).content}</TabPanel>
+          <TabPanel>{tabs.find(tab => tab.label === activeLabel)?.content}</TabPanel>
         </TabWrapper>
       )}
     </FormWrapper>

@@ -3,22 +3,19 @@ const util = require('util')
 const User = mongoose.model('User');
 const { body, validationResult } = require('express-validator');
 
-exports.emailExists = async (req, res, next) => {
+exports.isEmailAvailable = async (req, res, next) => {
   const { email } = req.body;
   
   try {
     const existingUser = await User.findOne({ email });
 
     if (existingUser) {
-      console.log('USER EXISTS');
-      res.status(400).json({ exists: true, message: 'Email already exists' });
+      return res.status(400).json({ exists: true, message: 'Email already exists' });
     } else {
-      // Email available
-      console.log('USER DOES NOT EXISTS');
+      // Email is available
       next();
     }
   } catch (error) {
-    console.error(`Error checking email existence: ${error.message}`);
     res.status(500).json({
       exists: false,
       message: error.message
@@ -68,9 +65,8 @@ exports.validateRegister = (req, res, next) => {
     next(errors);
   }
 
-  // Validation passed
   next();
-}
+};
 
 exports.register =  async (req, res, next) => {
   const user = new User({
@@ -85,5 +81,4 @@ exports.register =  async (req, res, next) => {
   const registerWithPromise = util.promisify(User.register.bind(User));
   await registerWithPromise(user, req.body.password);
   next();
-}
-
+};
