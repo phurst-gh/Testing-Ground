@@ -1,7 +1,8 @@
 ## Description
+- Register/Login setup
 
 ## Technologies
-- Backend: NodeJS
+- Backend: NodeJS/Express/MongoDB (Compass)
 - Frontend: React (Vite)
 
 ### Issues:
