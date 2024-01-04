@@ -41,9 +41,7 @@ const RegisterForm = () => {
 
   return (
     <>
-      {/* {errData?.map((message, index) => (
-        <FlashError key={index} message={message} />
-      ))} */}
+      {/* {errData && <FlashError message={errData} />} */}
 
       <div>
         <h3>Register</h3>

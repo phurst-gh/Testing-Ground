@@ -1,28 +1,61 @@
 const passport = require('passport');
 
-exports.loginPage = (req, res) => {
-  res.send('login page');
+exports.login = (req, res, next) => {
+  passport.authenticate('local', (err, user, info) => {
+    if (err) {
+      return res.status(500).json({ message: `Error with authentication ${message}.`});
+    }
+  
+    if (!user) {
+      // User should be attachted, authentication failed
+      return res.status(401).json({ message: 'Authentication failed' });
+    }
+  
+    // Auth successful, req.login establishs a session and logs the user in
+    req.login(user, (loginErr) => {
+      if (loginErr) {
+        return res.status(500).json({ message: `Error with login ${loginErr}.`});
+      }
+  
+      // Set a custom message in the session (optional)
+      req.session.authMessage = 'Success';
+  
+      if (user) {
+        console.log('user returned')
+        return res.status(200).json({ message: 'Success', user });
+      }
+    })
+  })(req, res, next);
+}; 
+
+exports.logout = (req, res, next) => {
+  req.logout(err => {
+    if (err) {
+      return next(err);
+    }
+    return res.status(200).json({ message: 'Logout success'});
+  });
+
+  // req.logout((err) => {
+  //   if (err) {
+  //     console.log(1);
+
+  //     return res.status(500).json({ error: 'Failed to log out' });
+  //   }
+  //   req.session.destroy((err) => {
+  //     if (err) {
+  //       console.log(2);
+  //       return res.status(500).json({ error: 'Failed to destroy session' });
+  //     }
+  //     console.log(3);
+  //     return res.status(200).json({ message: 'Logout successful' });
+  //   });
+  // });
 };
 
-// passport uses strategies, the local strategy is commonly used for username and password..
-// ..authentication. Passport must be configured before using any strategy (handlers/passport.js)..
-// ..this local strategy will add the User obj on each request.
-exports.login = passport.authenticate('local', {
-  failureMessage: 'Login failed.',
-  successMessage: 'Logged in!'
-})
-
-exports.logout = (req, res) => {
-  req.logout();
-  res.json({ success: true, message: 'Logout successful' });
-  res.redirect('/');
-};
-
-exports.isLoggedIn = (req, res, next) => {
-  if (req.isAuthenticated) {
-    next();
-    return;
+exports.isAuthenticated = (req, res, next) => {
+  if (req.isAuthenticated()) {
+    return res.status(200).json({ message: 'Authorised' });
   }
-
-  res.json('User not authorised.');
-}
+  return res.status(401).json({ message: 'Unauthorised' });
+};

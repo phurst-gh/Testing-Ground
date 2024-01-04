@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { useNavigate } from 'react-router-dom';
 
 import FlashError from "../flashes/FlashError";
 
@@ -10,7 +11,8 @@ const initialState = {
 
 const LoginForm = () => {
   const [formData, setFormData] = useState(initialState);
-  const [errData, setErrData] = useState();
+  const [loginResponse, setLoginResponse] = useState();
+  const navigate = useNavigate();
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -24,25 +26,25 @@ const LoginForm = () => {
     e.preventDefault();
 
     axios
-      .post("http://localhost:3001/login", formData)
-      .then(() => {
-        console.log("Submit success!!");
+      .post("http://localhost:3001/login", formData, { withCredentials: true })
+      .then(res => {
+        console.log('res.data', res.data);
+        setLoginResponse(res.data);
         setFormData(initialState);
+        navigate('/HomeLoggedIn');
       })
       .catch((error) => {
-        console.log("Submit fail..");
-        const errorResponseData = error.response.data;
-        console.log('errorResponseData', errorResponseData);
-        setErrData(errorResponseData);
+        console.log("Login fail..");
+        console.log('error', error);
+        setLoginResponse(error);
       });
   };
 
   return (
     <>
-      {/* {errData?.map((message, index) => (
+      {/* {loginResponse?.map((message, index) => (
         <FlashError key={index} message={message} />
       ))} */}
-      {errData && errData}
 
       <div>
         <h3>Login</h3>
@@ -65,6 +67,7 @@ const LoginForm = () => {
             onChange={handleInputChange}
             // required
           />
+
           <button type="submit">Login</button>
         </form>
       </div>
