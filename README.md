@@ -6,5 +6,5 @@
 
 ### Issues:
 
-- RRDv6 not rendeirng components on redirect(naviagte)
+- RRDv6 not rendering components on redirect(navigate)
 - Passport sessions logout not removing session data from MongoDB backend or the cookie on the frontend
