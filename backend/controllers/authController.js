@@ -29,33 +29,39 @@ exports.login = (req, res, next) => {
 }; 
 
 exports.logout = (req, res, next) => {
-  req.logout(err => {
-    if (err) {
-      return next(err);
-    }
-    return res.status(200).json({ message: 'Logout success'});
-  });
-
-  // req.logout((err) => {
+  // req.logout(err => {
   //   if (err) {
-  //     console.log(1);
-
-  //     return res.status(500).json({ error: 'Failed to log out' });
+  //     return next(err);
   //   }
-  //   req.session.destroy((err) => {
-  //     if (err) {
-  //       console.log(2);
-  //       return res.status(500).json({ error: 'Failed to destroy session' });
-  //     }
-  //     console.log(3);
-  //     return res.status(200).json({ message: 'Logout successful' });
-  //   });
+  //   return res.status(200).json({ message: 'Logout success'});
   // });
+
+  req.logout((err) => {
+    if (err) {
+      console.log(1);
+
+      return res.status(500).json({ error: 'Failed to log out' });
+    }
+    req.session.destroy((err) => {
+      if (err) {
+        console.log(2);
+        return res.status(500).json({ error: 'Failed to destroy session' });
+      }
+      console.log(3);
+      res.clearCookie('connect.sid');
+      // Don't redirect, just print text
+      res.send('Logged out');
+      // return res.status(200).json({ message: 'Logout successful' });
+    });
+  });
 };
 
 exports.isAuthenticated = (req, res, next) => {
+  console.log('isAuthenticated', 1);
   if (req.isAuthenticated()) {
+    console.log('isAuthenticated', 2);
     return res.status(200).json({ message: 'Authorised' });
   }
+  console.log('isAuthenticated', 3);
   return res.status(401).json({ message: 'Unauthorised' });
 };
