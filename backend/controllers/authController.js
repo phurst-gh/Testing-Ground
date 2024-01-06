@@ -57,11 +57,8 @@ exports.logout = (req, res, next) => {
 };
 
 exports.isAuthenticated = (req, res, next) => {
-  console.log('isAuthenticated', 1);
   if (req.isAuthenticated()) {
-    console.log('isAuthenticated', 2);
     return res.status(200).json({ message: 'Authorised' });
   }
-  console.log('isAuthenticated', 3);
   return res.status(401).json({ message: 'Unauthorised' });
 };

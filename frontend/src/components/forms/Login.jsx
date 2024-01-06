@@ -31,7 +31,6 @@ const LoginForm = () => {
         console.log('res.data', res.data);
         setLoginResponse(res.data);
         setFormData(initialState);
-        navigate('/HomeLoggedIn');
       })
       .catch((error) => {
         console.log("Login fail..");

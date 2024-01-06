@@ -11,10 +11,9 @@ const AuthProvider = ({ children }) => {
       withCredentials: true, // Include credentials (cookies) in the request
     })
     .then(response => {
-      setIsAuthenticated(response.data);
+      setIsAuthenticated(response.data.message);
     })
     .catch(error => {
-      console.log('AuthProvider caught error:', error);
       setIsAuthenticated(error.response.data.message);
     });
   }, []);

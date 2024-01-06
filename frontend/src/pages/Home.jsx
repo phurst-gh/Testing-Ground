@@ -10,11 +10,11 @@ const Home = () => {
   const [ userIsAuthenticated, setUserIsAuthenticated ] = useState();
   const { isAuthenticated } = useAuth();
   
-  console.log({ userIsAuthenticated });
   useEffect(() => {
-    setUserIsAuthenticated(isAuthenticated?.message);
+    console.log( isAuthenticated );
+    setUserIsAuthenticated(isAuthenticated);
   });
-
+  
   const loggedInTabs = [
     { label: 'logout', content: <LogoutForm /> },
   ];
@@ -28,9 +28,12 @@ const Home = () => {
   return (
     <>
       <h1>Testing Ground</h1>
-      {userIsAuthenticated
-        ? <Tabs tabs={loggedInTabs} />
-        : <Tabs tabs={loggedOutTabs} />
+      
+      {userIsAuthenticated === 'Authorised' &&
+        <Tabs tabs={loggedInTabs} />
+      }
+      {userIsAuthenticated === 'Unauthorised' &&
+        <Tabs tabs={loggedOutTabs} />
       }
     </>
   );
