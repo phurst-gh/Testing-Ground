@@ -18,24 +18,17 @@ exports.login = (req, res, next) => {
       }
   
       // Set a custom message in the session (optional)
-      req.session.authMessage = 'Success';
+      req.session.authMessage = 'Authorised';
   
       if (user) {
         console.log('user returned')
-        return res.status(200).json({ message: 'Success', user });
+        return res.status(200).json({ message: 'Authorised', user });
       }
     })
   })(req, res, next);
 }; 
 
 exports.logout = (req, res, next) => {
-  // req.logout(err => {
-  //   if (err) {
-  //     return next(err);
-  //   }
-  //   return res.status(200).json({ message: 'Logout success'});
-  // });
-
   req.logout((err) => {
     if (err) {
       console.log(1);
@@ -49,9 +42,7 @@ exports.logout = (req, res, next) => {
       }
       console.log(3);
       res.clearCookie('connect.sid');
-      // Don't redirect, just print text
       res.send('Logged out');
-      // return res.status(200).json({ message: 'Logout successful' });
     });
   });
 };

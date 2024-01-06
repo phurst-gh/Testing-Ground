@@ -3,6 +3,7 @@ import axios from "axios";
 import { useNavigate } from 'react-router-dom';
 
 import FlashError from "../flashes/FlashError";
+import { useAuth } from "../context/AuthContext";
 
 const initialState = {
   email: "",
@@ -11,8 +12,8 @@ const initialState = {
 
 const LoginForm = () => {
   const [formData, setFormData] = useState(initialState);
-  const [loginResponse, setLoginResponse] = useState();
   const navigate = useNavigate();
+  const { setUserData, setIsAuthenticated } = useAuth();
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -28,9 +29,11 @@ const LoginForm = () => {
     axios
       .post("http://localhost:3001/login", formData, { withCredentials: true })
       .then(res => {
-        console.log('res.data', res.data);
-        setLoginResponse(res.data);
+        console.log('res.data', res);
+        setUserData(res.data.user);
+        setIsAuthenticated(res.data.message);
         setFormData(initialState);
+        // console.log('isAuthenticated', isAuthenticated);
       })
       .catch((error) => {
         console.log("Login fail..");

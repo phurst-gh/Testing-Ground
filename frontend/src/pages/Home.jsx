@@ -13,7 +13,7 @@ const Home = () => {
   useEffect(() => {
     console.log( isAuthenticated );
     setUserIsAuthenticated(isAuthenticated);
-  });
+  }, [isAuthenticated]);
   
   const loggedInTabs = [
     { label: 'logout', content: <LogoutForm /> },
@@ -28,7 +28,7 @@ const Home = () => {
   return (
     <>
       <h1>Testing Ground</h1>
-      
+
       {userIsAuthenticated === 'Authorised' &&
         <Tabs tabs={loggedInTabs} />
       }
