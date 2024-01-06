@@ -14,6 +14,7 @@ const AuthProvider = ({ children }) => {
       setIsAuthenticated(response.data);
     })
     .catch(error => {
+      console.log('AuthProvider caught error:', error);
       setIsAuthenticated(error.response.data.message);
     });
   }, []);
