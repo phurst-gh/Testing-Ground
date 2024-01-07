@@ -13,8 +13,6 @@ const Home = () => {
   useEffect(() => {
     setUserIsAuthenticated(isAuthenticated);
   });
-
-  console.log({ userIsAuthenticated })
   
   const loggedInTabs = [
     { label: 'logout', content: <LogoutForm /> },

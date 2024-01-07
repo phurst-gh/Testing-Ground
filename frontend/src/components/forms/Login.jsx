@@ -29,11 +29,9 @@ const LoginForm = () => {
     axios
       .post("http://localhost:3001/login", formData, { withCredentials: true })
       .then(res => {
-        console.log('res.data', res);
         setUserData(res.data.user);
         setIsAuthenticated(res.data.message);
         setFormData(initialState);
-        // console.log('isAuthenticated', isAuthenticated);
       })
       .catch((error) => {
         console.log("Login fail..");

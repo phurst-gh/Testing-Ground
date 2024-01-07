@@ -30,25 +30,20 @@ exports.login = (req, res, next) => {
   })(req, res, next);
 }; 
 
-// exports.logout = (req, res, next) => {
-//   req.session = null;   
-//   req.logout((err) => {
-//     if (err) {
-//       return res.status(500).json({ error: 'Failed to log out' });
-//     }
-//     req.session.destroy((err) => {
-//       if (err) {
-//         return res.status(500).json({ error: 'Failed to destroy session' });
-//       }
-     
-//       console.log('Logout "worked"');
-//       return res
-//         .clearCookie('connect.sid') // not wokring
-//         .status(401)
-//         .json({ message: 'Unauthorised' });
-//     });
-//   });
-// };
+exports.logout = (req, res, next) => {
+  req.logout((err) => {
+    if (err) {
+      return res.status(500).json({ error: 'Failed to log out' });
+    }
+    
+    req.session = null;
+    res.clearCookie('connect.sid');
+    res.send({
+      message: 'Logged out',
+      isAuth: req.isAuthenticated()
+    })
+  });
+};
 
 exports.isAuthenticated = (req, res, next) => {
   if (req.isAuthenticated()) {

@@ -10,13 +10,22 @@ const AuthProvider = ({ children }) => {
   useEffect(() => {
     axios
       .get("http://localhost:3001/api/is-authenticated", {
-        withCredentials: true, // Include credentials (cookies) in the request
+        withCredentials: true,
       })
       .then((response) => {
         console.log(response);
+        console.log({
+          status: response.status,
+          isAuthenticated: response.data.message,
+        });
         setIsAuthenticated(response.data.message);
       })
       .catch((error) => {
+        console.log({
+          status: error.response.status,
+          isAuthenticated: error.response.data.message,
+          message: error.message
+        });
         setIsAuthenticated(error.response.data.message);
       });
   }, []);
