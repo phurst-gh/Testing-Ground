@@ -22,8 +22,9 @@ app.use(session({
   resave: false,
   saveUninitialized: false,
   store: new MongoStore({ mongoUrl: process.env.DATABASE }),
+  unset: 'destroy',
   cookie: {
-    maxAge: 1000 * 60 * 60 * 24, // 1 day in milliseconds
+    maxAge: 300000 // 5 minutes
   }
 }));
 

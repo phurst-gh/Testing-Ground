@@ -38,7 +38,6 @@ const LoginForm = () => {
       .catch((error) => {
         console.log("Login fail..");
         console.log('error', error);
-        setLoginResponse(error);
       });
   };
 

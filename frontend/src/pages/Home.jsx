@@ -11,9 +11,10 @@ const Home = () => {
   const { isAuthenticated } = useAuth();
   
   useEffect(() => {
-    console.log( isAuthenticated );
     setUserIsAuthenticated(isAuthenticated);
-  }, [isAuthenticated]);
+  });
+
+  console.log({ userIsAuthenticated })
   
   const loggedInTabs = [
     { label: 'logout', content: <LogoutForm /> },
@@ -24,7 +25,6 @@ const Home = () => {
     { label: "login", content: <LoginForm /> },
   ];
 
-  console.log({ userIsAuthenticated });
   return (
     <>
       <h1>Testing Ground</h1>

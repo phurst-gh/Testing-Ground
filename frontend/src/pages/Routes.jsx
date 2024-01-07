@@ -15,6 +15,7 @@ const Routes = () => {
   <Router>
     <RRDRoutes>
       <Route element={<Home />} path="/" />
+      {/* <Route element={<p>Somehwehere</p>} path="/somewhere" /> */}
       {/* <Route element={<PrivateOutlet isAuthenticated={userIsAuthenticated} />}>
         <Route element={<HomeLoggedIn />} path="/HomeLoggedIn" exact />
       </Route> */}
