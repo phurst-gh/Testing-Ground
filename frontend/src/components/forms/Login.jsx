@@ -1,9 +1,8 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { useNavigate } from 'react-router-dom';
 
-import FlashError from "../flashes/FlashError";
 import { useAuth } from "../context/AuthContext";
+import FlashError from "../flashes/FlashError";
 
 const initialState = {
   email: "",
@@ -12,7 +11,6 @@ const initialState = {
 
 const LoginForm = () => {
   const [formData, setFormData] = useState(initialState);
-  const navigate = useNavigate();
   const { setUserData, setIsAuthenticated } = useAuth();
 
   const handleInputChange = (e) => {

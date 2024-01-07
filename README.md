@@ -1,3 +1,5 @@
+# Testing Ground
+
 ## Description
 - Register/Login setup
 
@@ -5,7 +7,9 @@
 - Backend: NodeJS/Express/MongoDB (Compass)
 - Frontend: React (Vite)
 
-### Issues:
+## Up next..
+- Routing RRD
+- Error handling
 
+## Issues:
 - RRDv6 not rendering components on redirect(navigate)
-- Passport sessions logout not removing session data from MongoDB backend or the cookie on the frontend

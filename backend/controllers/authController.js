@@ -17,13 +17,7 @@ exports.login = (req, res, next) => {
         return res.status(500).json({ message: `Error with login ${loginErr}.`});
       }
   
-      // Set a custom message in the session (optional)
-      req.session.authMessage = 'Authorised';
-  
       if (user) {
-        console.log('login', req.isAuthenticated());
-
-        console.log('user returned')
         return res.status(200).json({ message: 'Authorised', user });
       }
     })

@@ -13,11 +13,11 @@ const AuthProvider = ({ children }) => {
         withCredentials: true,
       })
       .then((response) => {
-        console.log(response);
         console.log({
           status: response.status,
           isAuthenticated: response.data.message,
         });
+        setUserData(response.data.user);
         setIsAuthenticated(response.data.message);
       })
       .catch((error) => {
@@ -26,9 +26,10 @@ const AuthProvider = ({ children }) => {
           isAuthenticated: error.response.data.message,
           message: error.message
         });
+        setUserData(error.response.data.user);
         setIsAuthenticated(error.response.data.message);
       });
-  }, []);
+  });
 
   return (
     <AuthContext.Provider

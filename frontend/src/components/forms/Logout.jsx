@@ -1,14 +1,11 @@
-import React, { useState } from "react";
+import React from "react";
 import axios from "axios";
-import { useNavigate } from 'react-router-dom';
-import Cookies from "js-cookie";
 
-import FlashError from "../flashes/FlashError";
 import { useAuth } from "../context/AuthContext";
+import FlashError from "../flashes/FlashError";
 
 const LogoutForm = () => {
-  const navigate = useNavigate();
-  const { isAuthenticated } = useAuth();
+  const { setUserData, setIsAuthenticated } = useAuth();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -17,8 +14,9 @@ const LogoutForm = () => {
       .post("http://localhost:3001/logout", {}, {
         withCredentials: true
       })
-      .then(() => {
-        window.location.href = '/';
+      .then(res => {
+        setUserData(res.data.user);
+        setIsAuthenticated(res.data.message);
       })
       .catch((error) => {
         console.log("Logout fail..");
