@@ -18,7 +18,9 @@ const Home = () => {
 
   return (
     <>
-      {isAuthenticated === "Unauthorised" && (
+      {isAuthenticated === "Authorised" 
+      ? <p>You are already logged in</p>
+      : (
         <>
           <h1>Home</h1>
           <Tabs tabs={loggedOutTabs} />
