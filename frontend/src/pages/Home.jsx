@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Navigate } from "react-router-dom";
 
 import Tabs from "../components/tabs/Tabs";
 import LogoutForm from "../components/forms/Logout";
@@ -14,18 +15,16 @@ const Home = () => {
     { label: "login", content: <LoginForm /> },
   ];
 
-  console.log("HOME", isAuthenticated);
+  useEffect(() => {
+    if (isAuthenticated === "Authorised") {
+      return <Navigate to="/HomeLoggedIn" />;
+    }
+  }, [isAuthenticated]);
 
   return (
     <>
-      {isAuthenticated === "Authorised" 
-      ? <p>You are already logged in</p>
-      : (
-        <>
-          <h1>Home</h1>
-          <Tabs tabs={loggedOutTabs} />
-        </>
-      )}
+      <h1>Home</h1>
+      <Tabs tabs={loggedOutTabs} />
     </>
   );
 };
