@@ -1,17 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
-
-import { useAuth } from "../context/AuthContext";
-import FlashError from "../flashes/FlashError";
 
 const initialState = {
   email: "",
-  password: ""
+  password: "",
 };
 
 const LoginForm = () => {
   const [formData, setFormData] = useState(initialState);
-  const { setUserData, setIsAuthenticated } = useAuth();
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -21,28 +17,26 @@ const LoginForm = () => {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    axios
-      .post("http://localhost:3001/login", formData, { withCredentials: true })
-      .then(res => {
-        setUserData(res.data.user);
-        setIsAuthenticated(res.data.message);
-        setFormData(initialState);
-      })
-      .catch((error) => {
-        console.log("Login fail..");
-        console.log('error', error);
-      });
+    try {
+      await axios.post(
+        "http://localhost:3001/login",
+        formData,
+        { withCredentials: true }
+      );
+
+      setFormData(initialState);
+      window.location.href = "/HomeLoggedIn";
+    } catch (error) {
+      console.log("Login fail..");
+      console.log("error", error);
+    }
   };
 
   return (
     <>
-      {/* {loginResponse?.map((message, index) => (
-        <FlashError key={index} message={message} />
-      ))} */}
-
       <div>
         <h3>Login</h3>
 

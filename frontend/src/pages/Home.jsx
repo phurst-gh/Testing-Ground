@@ -7,32 +7,23 @@ import RegisterForm from "../components/forms/Register";
 import { useAuth } from "../components/context/AuthContext";
 
 const Home = () => {
-  const [ userIsAuthenticated, setUserIsAuthenticated ] = useState();
   const { isAuthenticated } = useAuth();
-  
-  useEffect(() => {
-    setUserIsAuthenticated(isAuthenticated);
-  });
-  
-  const loggedInTabs = [
-    { label: 'logout', content: <LogoutForm /> },
-  ];
 
   const loggedOutTabs = [
     { label: "register", content: <RegisterForm /> },
     { label: "login", content: <LoginForm /> },
   ];
 
+  console.log("HOME", isAuthenticated);
+
   return (
     <>
-      <h1>Testing Ground</h1>
-
-      {userIsAuthenticated === 'Authorised' &&
-        <Tabs tabs={loggedInTabs} />
-      }
-      {userIsAuthenticated === 'Unauthorised' &&
-        <Tabs tabs={loggedOutTabs} />
-      }
+      {isAuthenticated === "Unauthorised" && (
+        <>
+          <h1>Home</h1>
+          <Tabs tabs={loggedOutTabs} />
+        </>
+      )}
     </>
   );
 };

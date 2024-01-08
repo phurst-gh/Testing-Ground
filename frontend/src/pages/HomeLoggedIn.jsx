@@ -8,11 +8,9 @@ const HomeLoggedIn = () => {
     { label: 'logout', content: <LogoutForm /> },
   ];
 
-  console.log('Inside HomeLoggedIn')
-
   return (
     <>
-      <h1>Testing Ground</h1>
+      <h1>Home Logged In</h1>
       <Tabs tabs={loggedInTabs} />
     </>
   )
