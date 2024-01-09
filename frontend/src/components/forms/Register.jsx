@@ -1,7 +1,25 @@
 import React, { useState } from "react";
 import axios from "axios";
+import styled from "styled-components";
 
-import FlashError from "../flashes/FlashError";
+import NavBar from "../navigation/navbar";
+
+const FormStyled = styled("div")`
+  form {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+
+    input {
+      margin-bottom: 10px;
+    }
+
+    button {
+      margin-top: 10px;
+      padding: 8px;
+    }
+  }
+`;
 
 const initialState = {
   firstName: "",
@@ -41,9 +59,9 @@ const RegisterForm = () => {
 
   return (
     <>
-      {/* {errData && <FlashError message={errData} />} */}
+      {/* <NavBar /> */}
 
-      <div>
+      <FormStyled>
         <h3>Register</h3>
 
         <form onSubmit={handleSubmit}>
@@ -92,7 +110,7 @@ const RegisterForm = () => {
           />
           <button type="submit">Register</button>
         </form>
-      </div>
+      </FormStyled>
     </>
   );
 };

@@ -22,15 +22,9 @@ const LogoutForm = () => {
   };
 
   return (
-    <>
-      <div>
-        <h3>Logout</h3>
-
-        <form onSubmit={handleSubmit}>
-          <button type="submit">Logout</button>
-        </form>
-      </div>
-    </>
+    <form onSubmit={handleSubmit}>
+      <button type="submit">Logout</button>
+    </form>
   );
 };
 
