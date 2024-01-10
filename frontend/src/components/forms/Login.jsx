@@ -1,17 +1,31 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
+import styled from "styled-components";
 
-import { useAuth } from "../context/AuthContext";
-import FlashError from "../flashes/FlashError";
+const FormStyled = styled("div")`
+  form {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+
+    input {
+      margin-bottom: 10px;
+    }
+
+    button {
+      margin-top: 10px;
+      padding: 8px;
+    }
+  }
+`;
 
 const initialState = {
   email: "",
-  password: ""
+  password: "",
 };
 
 const LoginForm = () => {
   const [formData, setFormData] = useState(initialState);
-  const { setUserData, setIsAuthenticated } = useAuth();
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -21,54 +35,48 @@ const LoginForm = () => {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    axios
-      .post("http://localhost:3001/login", formData, { withCredentials: true })
-      .then(res => {
-        setUserData(res.data.user);
-        setIsAuthenticated(res.data.message);
-        setFormData(initialState);
-      })
-      .catch((error) => {
-        console.log("Login fail..");
-        console.log('error', error);
+    try {
+      await axios.post("http://localhost:3001/login", formData, {
+        withCredentials: true,
       });
+
+      setFormData(initialState);
+      window.location.href = "/pr1";
+    } catch (error) {
+      console.log("Login fail..");
+      console.log("error", error);
+    }
   };
 
   return (
-    <>
-      {/* {loginResponse?.map((message, index) => (
-        <FlashError key={index} message={message} />
-      ))} */}
+    <FormStyled>
+      <h3>Login</h3>
 
-      <div>
-        <h3>Login</h3>
+      <form onSubmit={handleSubmit}>
+        <label htmlFor="email">Email</label>
+        <input
+          type="text"
+          name="email"
+          value={formData.email}
+          onChange={handleInputChange}
+          // required
+        />
 
-        <form onSubmit={handleSubmit}>
-          <label htmlFor="email">Email</label>
-          <input
-            type="text"
-            name="email"
-            value={formData.email}
-            onChange={handleInputChange}
-            // required
-          />
+        <label htmlFor="password">Password</label>
+        <input
+          type="password"
+          name="password"
+          value={formData.password}
+          onChange={handleInputChange}
+          // required
+        />
 
-          <label htmlFor="password">Password</label>
-          <input
-            type="password"
-            name="password"
-            value={formData.password}
-            onChange={handleInputChange}
-            // required
-          />
-
-          <button type="submit">Login</button>
-        </form>
-      </div>
-    </>
+        <button type="submit">Login</button>
+      </form>
+    </FormStyled>
   );
 };
 

@@ -1,39 +1,42 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import styled from "styled-components";
 
+import NavBar from "../components/navigation/navbar";
 import Tabs from "../components/tabs/Tabs";
-import LogoutForm from "../components/forms/Logout";
 import LoginForm from "../components/forms/Login";
 import RegisterForm from "../components/forms/Register";
 import { useAuth } from "../components/context/AuthContext";
 
+const HomeWrapper = styled('div')`
+  display: flex;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
+`;
+
 const Home = () => {
-  const [ userIsAuthenticated, setUserIsAuthenticated ] = useState();
   const { isAuthenticated } = useAuth();
-  
-  useEffect(() => {
-    setUserIsAuthenticated(isAuthenticated);
-  });
-  
-  const loggedInTabs = [
-    { label: 'logout', content: <LogoutForm /> },
-  ];
+  const navigate = useNavigate();
 
   const loggedOutTabs = [
     { label: "register", content: <RegisterForm /> },
     { label: "login", content: <LoginForm /> },
   ];
 
-  return (
-    <>
-      <h1>Testing Ground</h1>
+  console.log(isAuthenticated)
 
-      {userIsAuthenticated === 'Authorised' &&
-        <Tabs tabs={loggedInTabs} />
-      }
-      {userIsAuthenticated === 'Unauthorised' &&
-        <Tabs tabs={loggedOutTabs} />
-      }
-    </>
+  useEffect(() => {
+    if (isAuthenticated === "Authorised") {
+      navigate('/pr1');
+    }
+  }, [isAuthenticated]);
+
+  return (
+    <HomeWrapper>
+      <NavBar />
+      <Tabs tabs={loggedOutTabs} />
+    </HomeWrapper>
   );
 };
 
