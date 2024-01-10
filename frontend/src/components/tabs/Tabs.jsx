@@ -15,18 +15,24 @@ const TabWrapper = styled.div`
   margin-bottom: 10px;
 `;
 
-const TabButtonStyled = styled.button`
-  padding: 10px;
-  margin-right: 10px;
+const TabPanelStyled = styled.div`
+  background: white;
   border: 1px solid #ccc;
-  /* background-color: ${({ active }) => (active ? 'white' : 'lightgrey')};
-  font-weight: ${({ active }) => (active ? 'bold' : 'normal')}; */
+  width: 40vw;
+  border-top-left-radius: 2px;
+  border-bottom-left-radius: 2px;
 `;
 
-const TabPanelStyled = styled.div`
+const TabButtonStyled = styled.button`
   border: 1px solid #ccc;
-  padding: 10px;
-`;
+  flex-grow: 1;
+  width: 40vw;
+  border-top-right-radius: 2px;
+  border-bottom-right-radius: 2px;
+  cursor: pointer;
+  /* background-color: ${({ active }) => (active ? "white" : "lightgrey")};
+  font-weight: ${({ active }) => (active ? "bold" : "normal")}; */
+  `;
 
 const TabButton = ({ label, onClick, disabled }) => {
 return (

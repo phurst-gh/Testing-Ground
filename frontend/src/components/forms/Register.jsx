@@ -1,7 +1,27 @@
 import React, { useState } from "react";
 import axios from "axios";
 
-import FlashError from "../flashes/FlashError";
+import NavBar from "../navigation/navbar";
+
+const FormStyled = styled('div')`
+    padding: 10px;
+    padding-left: 20px;
+    padding-right: 20px;
+
+    form {
+    display: flex;
+    flex-direction: column;
+
+    input {
+      margin-bottom: 10px;
+    }
+
+    button {
+      margin-top: 10px;
+      padding: 8px;
+    }
+  }
+`;
 
 const initialState = {
   firstName: "",
