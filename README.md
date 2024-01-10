@@ -1,7 +1,7 @@
 # Testing Ground
 
 ## Description
-- Register/Login setup
+...
 
 ## Technologies
 - Backend: NodeJS/Express/MongoDB (Compass)
