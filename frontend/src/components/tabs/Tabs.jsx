@@ -3,9 +3,11 @@ import styled from "styled-components";
 
 const TabWrapper = styled.div`
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  justify-content: center;
   margin-bottom: 10px;
-  max-width: 200px;
+  height: 420px;
+  max-width: 96vw;
 `;
 
 const TabButtonWrapper = styled.div`
@@ -16,14 +18,17 @@ const TabButtonStyled = styled.button`
   padding: 10px;
   border: 1px solid #ccc;
   flex-grow: 1;
+  width: 40vw;
+  cursor: pointer;
   /* background-color: ${({ active }) => (active ? "white" : "lightgrey")};
   font-weight: ${({ active }) => (active ? "bold" : "normal")}; */
-`;
+  `;
 
 const TabPanelStyled = styled.div`
+  background: white;
   border: 1px solid #ccc;
-  max-width: 200px;
   padding: 10px;
+  width: 40vw;
 `;
 
 const TabButton = ({ label, onClick, disabled }) => {
@@ -52,18 +57,21 @@ const TabComponent = ({ tabs }) => {
   return (
     tabs && (
       <TabWrapper>
-        <TabButtonWrapper>
-          {tabs.map((tab, i) => (
-            <TabButton
-              key={i}
-              label={tab.label}
-              onClick={() => handleTabClick(tab.label)}
-            />
-          ))}
-        </TabButtonWrapper>
         <TabPanel>
           {tabs.find((tab) => tab.label === activeLabel)?.content}
         </TabPanel>
+
+        <TabButtonWrapper>
+          {tabs.map((tab, i) => (
+            activeLabel !== tab.label && (
+              <TabButton
+                key={i}
+                label={tab.label}
+                onClick={() => handleTabClick(tab.label)}
+              />
+            )
+          ))}
+        </TabButtonWrapper>
       </TabWrapper>
     )
   );
