@@ -4,8 +4,8 @@ import styled from "styled-components";
 
 const FormStyled = styled('div')`
   padding: 10px;
-  padding-left: 20px;
-  padding-right: 20px;
+  padding-left: 40px;
+  padding-right: 40px;
 
   form {
     display: flex;

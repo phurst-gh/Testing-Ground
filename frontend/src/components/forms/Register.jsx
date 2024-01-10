@@ -2,21 +2,21 @@ import React, { useState } from "react";
 import axios from "axios";
 import styled from "styled-components";
 
-import NavBar from "../navigation/navbar";
+// import NavBar from "../navigation/navbar";
 
 const FormStyled = styled('div')`
     padding: 10px;
-    padding-left: 20px;
-    padding-right: 20px;
+    padding-left: 40px;
+    padding-right: 40px;
 
     form {
-    display: flex;
-    flex-direction: column;
+      display: flex;
+      flex-direction: column;
 
     input {
       margin-bottom: 10px;
     }
-
+    
     button {
       margin-top: 10px;
       padding: 8px;
@@ -65,7 +65,9 @@ const RegisterForm = () => {
       {/* <NavBar /> */}
 
       <FormStyled>
-        <h3>Register</h3>
+        <div>
+          <h3>Register</h3>
+        </div>
 
         <form onSubmit={handleSubmit}>
           <label htmlFor="firstName">First Name</label>
