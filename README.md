@@ -15,4 +15,4 @@
 - Add a GQL layer
 
 ## Issues:
-- RRDv6 not rendering components on redirect(navigate)
+...
