@@ -1,3 +1,7 @@
 html {
   font-size: 16px;
 }
+body {
+  background-image: linear-gradient(to right, #243949 0%, #517fa4 100%);
+  min-height: 100vh;
+}

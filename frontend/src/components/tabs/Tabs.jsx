@@ -1,18 +1,17 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 
-import FlashError from "../flashes/FlashError";
-
-const FormWrapper = styled.div`
-  input {
-    display: block;
-  }
-`;
-
 const TabWrapper = styled.div`
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  justify-content: center;
   margin-bottom: 10px;
+  height: 420px;
+  max-width: 96vw;
+`;
+
+const TabButtonWrapper = styled.div`
+  display: flex;
 `;
 
 const TabPanelStyled = styled.div`
@@ -35,11 +34,12 @@ const TabButtonStyled = styled.button`
   `;
 
 const TabButton = ({ label, onClick, disabled }) => {
-return (
-  <TabButtonStyled onClick={onClick} disabled={disabled}>
-    {label}
-  </TabButtonStyled>
-)};
+  return (
+    <TabButtonStyled onClick={onClick} disabled={disabled}>
+      {label}
+    </TabButtonStyled>
+  );
+};
 
 const TabPanel = ({ children }) => {
   return <TabPanelStyled>{children}</TabPanelStyled>;
@@ -48,7 +48,7 @@ const TabPanel = ({ children }) => {
 const TabComponent = ({ tabs }) => {
   const [activeLabel, setActiveLabel] = useState();
 
-  const handleTabClick = label => {
+  const handleTabClick = (label) => {
     setActiveLabel(label);
   };
 
@@ -56,24 +56,26 @@ const TabComponent = ({ tabs }) => {
     setActiveLabel(tabs[0].label);
   }, [tabs]);
 
-
   return (
-    <FormWrapper>
-      {tabs && (
-        <TabWrapper>
-          <div>
-            {tabs.map((tab, i) => (
+    tabs && (
+      <TabWrapper>
+        <TabPanel>
+          {tabs.find((tab) => tab.label === activeLabel)?.content}
+        </TabPanel>
+
+        <TabButtonWrapper>
+          {tabs.map((tab, i) => (
+            activeLabel !== tab.label && (
               <TabButton
                 key={i}
                 label={tab.label}
                 onClick={() => handleTabClick(tab.label)}
               />
-            ))}
-          </div>
-          <TabPanel>{tabs.find(tab => tab.label === activeLabel)?.content}</TabPanel>
-        </TabWrapper>
-      )}
-    </FormWrapper>
+            )
+          ))}
+        </TabButtonWrapper>
+      </TabWrapper>
+    )
   );
 };
 

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
+import styled from "styled-components";
 
 import NavBar from "../navigation/navbar";
 
@@ -61,9 +62,9 @@ const RegisterForm = () => {
 
   return (
     <>
-      {/* {errData && <FlashError message={errData} />} */}
+      {/* <NavBar /> */}
 
-      <div>
+      <FormStyled>
         <h3>Register</h3>
 
         <form onSubmit={handleSubmit}>
@@ -112,7 +113,7 @@ const RegisterForm = () => {
           />
           <button type="submit">Register</button>
         </form>
-      </div>
+      </FormStyled>
     </>
   );
 };
