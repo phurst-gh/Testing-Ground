@@ -56,7 +56,9 @@ const Routes = () => {
           exact
         />
         <Route path="/error" element={<p>Page error</p>} exact />
-        <Route path="*" element={<p>Path not resolved</p>} />
+
+        <Route path="*" element={<Navigate to="/notfound" />} />
+        <Route path="/notfound" element={<p>Path not resolved</p>} />
       </RRDRoutes>
     </Router>
   );
