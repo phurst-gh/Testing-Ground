@@ -8,6 +8,8 @@ import LoginForm from "../components/forms/Login";
 import RegisterForm from "../components/forms/Register";
 import { useAuth } from "../components/context/AuthContext";
 
+import BudgetCalculator from "../components/calculator/BudgetCalculator";
+
 const HomeWrapper = styled('div')`
   display: flex;
   height: 100vh;
@@ -19,7 +21,7 @@ const Home = () => {
   const { isAuthenticated } = useAuth();
   const navigate = useNavigate();
 
-  const loggedOutTabs = [
+  const tabs = [
     { label: "register", content: <RegisterForm /> },
     { label: "login", content: <LoginForm /> },
   ];
@@ -35,7 +37,8 @@ const Home = () => {
   return (
     <HomeWrapper>
       <NavBar />
-      <Tabs tabs={loggedOutTabs} />
+      {/* <Tabs tabs={tabs} /> */}
+      <BudgetCalculator />
     </HomeWrapper>
   );
 };
