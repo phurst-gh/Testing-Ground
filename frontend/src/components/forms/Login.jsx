@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import styled from "styled-components";
 
-const FormStyled = styled('div')`
+const FormStyled = styled.div`
   padding: 10px;
   padding-left: 40px;
   padding-right: 40px;
