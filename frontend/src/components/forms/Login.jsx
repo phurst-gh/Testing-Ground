@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import styled from "styled-components";
 
@@ -30,6 +31,7 @@ const initialState = {
 
 const LoginForm = () => {
   const [formData, setFormData] = useState(initialState);
+  const navigate = useNavigate();
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -41,17 +43,18 @@ const LoginForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    
 
     try {
       await axios.post("http://localhost:3001/login", formData, {
         withCredentials: true,
       });
-
       setFormData(initialState);
       window.location.href = "/pr1";
     } catch (error) {
       console.log("Login fail..");
       console.log("error", error);
+      window.location.href = "/error";
     }
   };
 

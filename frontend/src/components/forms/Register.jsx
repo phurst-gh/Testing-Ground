@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
 import styled from "styled-components";
-
 // import NavBar from "../navigation/navbar";
 
 const FormStyled = styled('div')`
@@ -34,7 +33,6 @@ const initialState = {
 
 const RegisterForm = () => {
   const [formData, setFormData] = useState(initialState);
-  const [errData, setErrData] = useState();
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -56,7 +54,7 @@ const RegisterForm = () => {
       .catch((error) => {
         console.log("Submit fail..");
         console.log(error);
-        setErrData(error);
+        window.location.href = "/error";
       });
   };
 

@@ -18,6 +18,7 @@ const LogoutForm = () => {
     } catch (error) {
       console.log("Logout fail..");
       console.log("error", error);
+      window.location.href = "/error";
     }
   };
 
