@@ -8,8 +8,6 @@ import LoginForm from "../components/forms/Login";
 import RegisterForm from "../components/forms/Register";
 import { useAuth } from "../components/context/AuthContext";
 
-import BudgetCalculator from "../components/calculator/BudgetCalculator";
-
 const HomeWrapper = styled('div')`
   display: flex;
   height: 100vh;
@@ -36,11 +34,8 @@ const Home = () => {
 
   return (
     <HomeWrapper>
-      <NavBar />
-      {/* <Tabs tabs={tabs} /> */}
-      <BudgetCalculator />
+      <Tabs tabs={tabs} />
     </HomeWrapper>
   );
-};
-
+};ListComponent
 export default Home;
