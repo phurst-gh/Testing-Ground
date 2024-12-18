@@ -1,7 +1,7 @@
 # Testing Ground
 
 ## Description
-...
+A place to try out areas I often dont get to do within work as they're usualy already built.
 
 ## Technologies
 - Backend: NodeJS/Express/MongoDB (Compass)
