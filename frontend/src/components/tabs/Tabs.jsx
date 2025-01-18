@@ -31,7 +31,7 @@ const TabButtonStyled = styled.button`
   cursor: pointer;
   /* background-color: ${({ active }) => (active ? "white" : "lightgrey")};
   font-weight: ${({ active }) => (active ? "bold" : "normal")}; */
-  `;
+`;
 
 const TabButton = ({ label, onClick, disabled }) => {
   return (
@@ -64,15 +64,16 @@ const TabComponent = ({ tabs }) => {
         </TabPanel>
 
         <TabButtonWrapper>
-          {tabs.map((tab, i) => (
-            activeLabel !== tab.label && (
-              <TabButton
-                key={i}
-                label={tab.label}
-                onClick={() => handleTabClick(tab.label)}
-              />
-            )
-          ))}
+          {tabs.map(
+            (tab, i) =>
+              activeLabel !== tab.label && (
+                <TabButton
+                  key={i}
+                  label={tab.label}
+                  onClick={() => handleTabClick(tab.label)}
+                />
+              )
+          )}
         </TabButtonWrapper>
       </TabWrapper>
     )

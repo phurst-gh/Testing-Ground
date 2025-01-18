@@ -1,7 +1,9 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import styled from "styled-components";
+import { useNavigate } from "react-router-dom";
+
+import { useAuth } from "../../context/AuthContext";
 
 const FormStyled = styled.div`
   padding: 10px;
@@ -32,6 +34,7 @@ const initialState = {
 const LoginForm = () => {
   const [formData, setFormData] = useState(initialState);
   const navigate = useNavigate();
+  const { checkIsAuthenticated } = useAuth();
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -43,18 +46,18 @@ const LoginForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
 
     try {
-      await axios.post("http://localhost:3001/login", formData, {
+      await axios.post("/api/login", formData, {
         withCredentials: true,
       });
       setFormData(initialState);
-      window.location.href = "/pr1";
+      await checkIsAuthenticated();
     } catch (error) {
-      console.log("Login fail..");
-      console.log("error", error);
-      window.location.href = "/error";
+      // console.log("Login fail..");
+      // console.log("error", error);
+      console.error("Login failed:", error);
+      navigate("/error");
     }
   };
 
@@ -69,7 +72,7 @@ const LoginForm = () => {
           name="email"
           value={formData.email}
           onChange={handleInputChange}
-          // required
+          required
         />
 
         <label htmlFor="password">Password</label>
@@ -78,7 +81,7 @@ const LoginForm = () => {
           name="password"
           value={formData.password}
           onChange={handleInputChange}
-          // required
+          required
         />
 
         <button type="submit">Login</button>

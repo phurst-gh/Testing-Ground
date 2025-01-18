@@ -9,27 +9,22 @@ const FlashMessages = () => {
   useEffect(() => {
     const fetchFlashMessages = async () => {
       try {
-        const response = await axios.get('/api/flash-messages');
-        console.log({ response });
+        const response = await axios.get("/api/flash-messages");
         setFlashMessages(response.data.flashMessages);
       } catch (error) {
-        console.error('Error fetching FlashMessages', error);
+        console.error("Error fetching FlashMessages", error);
       }
-    }
+    };
 
     fetchFlashMessages();
-  }, [])
+  }, []);
 
   return (
     <div>
-      {flashMessages?.success && (
-          <div>{flashMessages.success}</div>
-        )}
-        {flashMessages?.error && (
-          <FlashError message={flashMessages.error} />
-        )}
+      {flashMessages?.success && <div>{flashMessages.success}</div>}
+      {flashMessages?.error && <FlashError message={flashMessages.error} />}
     </div>
-  )
-}
+  );
+};
 
 export default FlashMessages;

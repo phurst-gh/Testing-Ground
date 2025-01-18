@@ -7,7 +7,7 @@ const LogoutForm = () => {
 
     try {
       await axios.post(
-        "http://localhost:3001/logout",
+        "/api/logout",
         {},
         {
           withCredentials: true,
@@ -16,8 +16,8 @@ const LogoutForm = () => {
 
       window.location.href = "/";
     } catch (error) {
-      console.log("Logout fail..");
-      console.log("error", error);
+      // console.log("Logout fail..");
+      // console.log("error", error);
       window.location.href = "/error";
     }
   };

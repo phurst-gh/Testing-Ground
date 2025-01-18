@@ -6,9 +6,9 @@ import NavBar from "../components/navigation/navbar";
 import Tabs from "../components/tabs/Tabs";
 import LoginForm from "../components/forms/Login";
 import RegisterForm from "../components/forms/Register";
-import { useAuth } from "../components/context/AuthContext";
+import { useAuth } from "../context/AuthContext";
 
-const HomeWrapper = styled('div')`
+const HomeWrapper = styled.div`
   display: flex;
   height: 100vh;
   justify-content: center;
@@ -19,15 +19,14 @@ const Home = () => {
   const { isAuthenticated } = useAuth();
   const navigate = useNavigate();
 
+  console.log('Home - isAuthenticated', isAuthenticated);
   const tabs = [
-    { label: "register", content: <RegisterForm /> },
-    { label: "login", content: <LoginForm /> },
+    { label: "Or register", content: <RegisterForm /> },
+    { label: "Or login", content: <LoginForm isAuthenticated={isAuthenticated} /> },
   ];
 
-  console.log(isAuthenticated)
-
   useEffect(() => {
-    if (isAuthenticated === "Authorised") {
+    if (isAuthenticated) {
       navigate('/pr1');
     }
   }, [isAuthenticated]);
@@ -37,5 +36,5 @@ const Home = () => {
       <Tabs tabs={tabs} />
     </HomeWrapper>
   );
-};ListComponent
+};
 export default Home;

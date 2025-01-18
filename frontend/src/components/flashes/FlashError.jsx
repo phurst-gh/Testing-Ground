@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 const FlashErrorStyled = styled.div`
   @keyframes slideIn {
@@ -13,15 +13,19 @@ const FlashErrorStyled = styled.div`
     }
   }
 
-  background: linear-gradient(20deg, rgba(255,0,0,1) 0%, rgba(200,0,0,1) 100%);
-  box-shadow: 0 3px 10px rgba(0,0,0,0.15);
+  background: linear-gradient(
+    20deg,
+    rgba(255, 0, 0, 1) 0%,
+    rgba(200, 0, 0, 1) 100%
+  );
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
   margin-bottom: 1rem;
-  padding: .3rem;
+  padding: 0.3rem;
   position: relative;
   z-index: 1;
   border-radius: 3px;
   display: flex;
-  animation: slideIn forwards .1s ease-in-out 2;
+  animation: slideIn forwards 0.1s ease-in-out 2;
   animation-timing-function: cubic-bezier(0.01, 1.68, 0.58, 1);
   & + .flash {
     animation-delay: 0.55s;
@@ -33,26 +37,21 @@ const FlashErrorStyled = styled.div`
   div {
     display: flex;
     justify-content: center;
-    padding: .5rem;
+    padding: 0.5rem;
     background: white;
     border-radius: 2px;
-    box-shadow: 0 0 2px 2px rgba(0,0,0,0.2);
+    box-shadow: 0 0 2px 2px rgba(0, 0, 0, 0.2);
     width: 100%;
     height: 100%;
   }
-
 `;
 
 const FlashError = ({ message }) => {
-
-console.log(message)
-
-return(
-  <FlashErrorStyled>
-    <div>
-      {message}
-    </div>
-  </FlashErrorStyled>
-)};
+  return (
+    <FlashErrorStyled>
+      <div>{message}</div>
+    </FlashErrorStyled>
+  );
+};
 
 export default FlashError;

@@ -1,21 +1,24 @@
 import React, { useState } from "react";
 import axios from "axios";
 import styled from "styled-components";
+import { useNavigate } from "react-router-dom";
+
+import { useAuth } from "../../context/AuthContext";
 // import NavBar from "../navigation/navbar";
 
 const FormStyled = styled.div`
-    padding: 10px;
-    padding-left: 40px;
-    padding-right: 40px;
+  padding: 10px;
+  padding-left: 40px;
+  padding-right: 40px;
 
-    form {
-      display: flex;
-      flex-direction: column;
+  form {
+    display: flex;
+    flex-direction: column;
 
     input {
       margin-bottom: 10px;
     }
-    
+
     button {
       margin-top: 10px;
       padding: 8px;
@@ -33,6 +36,8 @@ const initialState = {
 
 const RegisterForm = () => {
   const [formData, setFormData] = useState(initialState);
+  const navigate = useNavigate();
+  const { checkIsAuthenticated } = useAuth();
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -46,15 +51,17 @@ const RegisterForm = () => {
     e.preventDefault();
 
     axios
-      .post("http://localhost:3001/register", formData)
-      .then(() => {
-        console.log("Submit success!!");
+      .post("/api/register", formData)
+      .then(async () => {
         setFormData(initialState);
+        await checkIsAuthenticated();
       })
       .catch((error) => {
-        console.log("Submit fail..");
-        console.log(error);
-        window.location.href = "/error";
+        // console.log("Submit fail..");
+        // console.log(error);
+        // window.location.href = "/error";
+        console.error("Login failed:", error);
+        navigate("/error");
       });
   };
 
@@ -74,7 +81,7 @@ const RegisterForm = () => {
             name="firstName"
             value={formData.firstName}
             onChange={handleInputChange}
-            // required
+            required
           />
           <label htmlFor="lastName">Last Name</label>
           <input
@@ -82,7 +89,7 @@ const RegisterForm = () => {
             name="lastName"
             value={formData.lastName}
             onChange={handleInputChange}
-            // required
+            required
           />
 
           <label htmlFor="email">Email</label>
@@ -91,7 +98,7 @@ const RegisterForm = () => {
             name="email"
             value={formData.email}
             onChange={handleInputChange}
-            // required
+            required
           />
 
           <label htmlFor="password">Password</label>
@@ -100,7 +107,7 @@ const RegisterForm = () => {
             name="password"
             value={formData.password}
             onChange={handleInputChange}
-            // required
+            required
           />
 
           <label htmlFor="password-confirm">Confirm Password</label>
@@ -109,7 +116,7 @@ const RegisterForm = () => {
             name="passwordConfirm"
             value={formData.passwordConfirm}
             onChange={handleInputChange}
-            // required
+            required
           />
           <button type="submit">Register</button>
         </form>

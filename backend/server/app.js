@@ -23,7 +23,7 @@ app.use(session({
   saveUninitialized: false,
   store: new MongoStore({ mongoUrl: process.env.DATABASE }),
   cookie: {
-    maxAge: 300000 // 5 minutes
+    maxAge: 86400000 // 24 hours
   }
 }));
 
@@ -45,7 +45,7 @@ app.use(cors(corsOptions));
 // After any potential middleware we call our routes
 app.use('/', routes);
 
-// If that above routes didnt work, we 404 them and forward to error handler
+// If the above routes didnt work, we 404 them and forward to error handler
 // Look into more error handling
 // app.use(errorHandlers.notFound);
 

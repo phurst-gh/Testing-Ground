@@ -5,7 +5,7 @@ import styled from "styled-components";
 import RegisterForm from "../forms/Register";
 import LoginForm from "../forms/Login";
 import LogoutForm from "../forms/Logout";
-import { useAuth } from "../context/AuthContext";
+import { useAuth } from "../../context/AuthContext";
 
 const NavBarStyled = styled("nav")`
   ul {
@@ -33,7 +33,7 @@ const NavBar = () => {
         <li>
           <Link to="/reports">reports</Link>
         </li> */}
-        {isAuthenticated === "Authorised" && (
+        {isAuthenticated && (
           <li>
             <LogoutForm />
           </li>
