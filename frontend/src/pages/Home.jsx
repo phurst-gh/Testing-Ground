@@ -2,7 +2,6 @@ import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
-import NavBar from "../components/navigation/navbar";
 import Tabs from "../components/tabs/Tabs";
 import LoginForm from "../components/forms/Login";
 import RegisterForm from "../components/forms/Register";
