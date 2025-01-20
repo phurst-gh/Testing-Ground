@@ -1,7 +1,7 @@
 import React from "react";
 import axios from "axios";
 
-const LogoutForm = () => {
+const LogoutButton = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -23,10 +23,8 @@ const LogoutForm = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <button type="submit">Logout</button>
-    </form>
+    <button onClick={handleSubmit}>Logout</button>
   );
 };
 
-export default LogoutForm;
+export default LogoutButton;
