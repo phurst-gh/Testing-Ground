@@ -1,11 +1,11 @@
 import React from "react";
 import NavBar from "../components/navigation/navbar";
 
-const PrivateRoute3 = () => (
+const UserProfilePage = () => (
   <>
     <NavBar />
-    <h1>PrivateRoute3</h1>
+    <h1>UserProfilePage</h1>
   </>
 );
 
-export default PrivateRoute3;
+export default UserProfilePage;

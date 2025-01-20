@@ -2,9 +2,7 @@ import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
-import Tabs from "../components/tabs/Tabs";
-import LoginForm from "../components/forms/Login";
-import RegisterForm from "../components/forms/Register";
+import Tabs from "../components/access/LoginAndRegister";
 import { useAuth } from "../context/AuthContext";
 
 const HomeWrapper = styled.div`
@@ -19,12 +17,9 @@ const Home = () => {
   const navigate = useNavigate();
 
   console.log('Home - isAuthenticated', isAuthenticated);
-  const tabs = [
-    { label: "Or register", content: <RegisterForm /> },
-    { label: "Or login", content: <LoginForm isAuthenticated={isAuthenticated} /> },
-  ];
 
   useEffect(() => {
+    console.log('OOPS! Home - isAuthenticated', isAuthenticated);
     if (isAuthenticated) {
       navigate('/pr1');
     }
@@ -32,7 +27,7 @@ const Home = () => {
 
   return (
     <HomeWrapper>
-      <Tabs tabs={tabs} />
+      <Tabs/>
     </HomeWrapper>
   );
 };

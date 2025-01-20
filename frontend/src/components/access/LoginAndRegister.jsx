@@ -1,5 +1,9 @@
 import React, { useState, useEffect } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 import styled from "styled-components";
+
+import LoginForm from "./forms/LoginForm";
+import RegisterForm from "./forms/RegisterForm";
 
 const TabWrapper = styled.div`
   display: flex;
@@ -29,8 +33,6 @@ const TabButtonStyled = styled.button`
   border-top-right-radius: 2px;
   border-bottom-right-radius: 2px;
   cursor: pointer;
-  /* background-color: ${({ active }) => (active ? "white" : "lightgrey")};
-  font-weight: ${({ active }) => (active ? "bold" : "normal")}; */
 `;
 
 const TabButton = ({ label, onClick, disabled }) => {
@@ -45,16 +47,34 @@ const TabPanel = ({ children }) => {
   return <TabPanelStyled>{children}</TabPanelStyled>;
 };
 
-const TabComponent = ({ tabs }) => {
+const tabs = [
+  { text: "Or register", label: "register", content: <RegisterForm /> },
+  { text: "Or login", label: "login", content: <LoginForm /> },
+];
+
+const TabComponent = () => {
+  const location = useLocation();
+  const navigate = useNavigate();
+
   const [activeLabel, setActiveLabel] = useState();
 
   const handleTabClick = (label) => {
     setActiveLabel(label);
+    navigate({
+      pathname: location.pathname,
+      search: `?tab=${encodeURIComponent(label)}`,
+    });
   };
 
   useEffect(() => {
-    setActiveLabel(tabs[0].label);
-  }, [tabs]);
+    const queryParams = new URLSearchParams(location.search);
+    const tabQuery = queryParams.get("tab");
+    if (tabQuery && tabs.some((tab) => tab.label === tabQuery)) {
+      setActiveLabel(tabQuery);
+    } else {
+      setActiveLabel(tabs[0].label);
+    }
+  }, [location.search, tabs]);
 
   return (
     tabs && (

@@ -11,7 +11,7 @@ import Home from "./pages/Home";
 import Unauthenticated from "./pages/Unauthenticated";
 import PrivateRoute1 from "./pages/PrivateRoute1";
 import PrivateRoute2 from "./pages/PrivateRoute2";
-import PrivateRoute3 from "./pages/PrivateRoute3";
+import UserProfilePage from "./pages/UserProfilePage";
 import { useAuth } from "./context/AuthContext";
 
 const PrivateOutlet = () => {
@@ -33,7 +33,7 @@ const Routes = () => (
       <Route element={<PrivateOutlet />}>
         <Route element={<PrivateRoute1 />} path="/pr1" exact />
         <Route element={<PrivateRoute2 />} path="/pr2" exact />
-        <Route element={<PrivateRoute3 />} path="/pr3" exact />
+        <Route element={<UserProfilePage />} path="/profile/:id" exact />
       </Route>
 
       {/* Other Routes */}

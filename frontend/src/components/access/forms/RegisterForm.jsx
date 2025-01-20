@@ -3,8 +3,7 @@ import axios from "axios";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 
-import { useAuth } from "../../context/AuthContext";
-// import NavBar from "../navigation/navbar";
+import { useAuth } from "@src/context/AuthContext";
 
 const FormStyled = styled.div`
   padding: 10px;

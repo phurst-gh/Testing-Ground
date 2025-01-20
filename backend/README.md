@@ -77,6 +77,7 @@ Replace these values with your actual configuration.
 
 - [Express Documentation](https://expressjs.com/)
 - [MongoDB Documentation](https://www.mongodb.com/docs/)
+- [Passport (local strategy) Documentation](https://www.passportjs.org/packages/passport-local/)
 
 ---
 

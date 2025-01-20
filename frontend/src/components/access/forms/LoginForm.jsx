@@ -3,7 +3,7 @@ import axios from "axios";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 
-import { useAuth } from "../../context/AuthContext";
+import { useAuth } from "@src/context/AuthContext";
 
 const FormStyled = styled.div`
   padding: 10px;
@@ -53,10 +53,8 @@ const LoginForm = () => {
       });
       setFormData(initialState);
       await checkIsAuthenticated();
-    } catch (error) {
-      // console.log("Login fail..");
-      // console.log("error", error);
-      console.error("Login failed:", error);
+    } catch (e) {
+      console.error("Login catch error", e);
       navigate("/error");
     }
   };
