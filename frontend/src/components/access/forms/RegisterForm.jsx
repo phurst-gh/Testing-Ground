@@ -36,7 +36,7 @@ const initialState = {
 const RegisterForm = () => {
   const [formData, setFormData] = useState(initialState);
   const navigate = useNavigate();
-  const { checkIsAuthenticated } = useAuth();
+  const { updateAuthContext } = useAuth();
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -53,7 +53,7 @@ const RegisterForm = () => {
       .post("/api/register", formData)
       .then(async () => {
         setFormData(initialState);
-        await checkIsAuthenticated();
+        await updateAuthContext();
       })
       .catch((error) => {
         // console.log("Submit fail..");

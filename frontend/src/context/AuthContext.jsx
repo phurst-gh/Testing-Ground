@@ -7,7 +7,7 @@ const AuthProvider = ({ children }) => {
   const [isAuthenticated, setIsAuthenticated] = useState();
   const [userData, setUserData] = useState();
 
-  const checkIsAuthenticated = async () => {
+  const updateAuthContext = async () => {
     try {
       const response = await axios.get("/api/is-authenticated", {
         withCredentials: true,
@@ -30,12 +30,12 @@ const AuthProvider = ({ children }) => {
   };
 
   useEffect(() => {
-    checkIsAuthenticated();
+    updateAuthContext();
   }, []);
 
   return (
     <AuthContext.Provider
-      value={{ isAuthenticated, checkIsAuthenticated, userData, setUserData }}
+      value={{ isAuthenticated, updateAuthContext, userData }}
     >
       {children}
     </AuthContext.Provider>

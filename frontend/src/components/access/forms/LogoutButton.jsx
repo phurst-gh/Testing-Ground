@@ -22,7 +22,7 @@ const Button = styled.button`
 
 const LogoutButton = () => {
   const navigate = useNavigate();
-  const { checkIsAuthenticated } = useAuth();
+  const { updateAuthContext } = useAuth();
   
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -37,7 +37,7 @@ const LogoutButton = () => {
       );
 
       console.log("Logged out");
-      await checkIsAuthenticated();
+      await updateAuthContext();
       navigate("/");
     } catch (e) {
       console.log("LogoutButton catch error", e);

@@ -34,7 +34,7 @@ const initialState = {
 const LoginForm = () => {
   const [formData, setFormData] = useState(initialState);
   const navigate = useNavigate();
-  const { checkIsAuthenticated } = useAuth();
+  const { updateAuthContext } = useAuth();
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -52,7 +52,7 @@ const LoginForm = () => {
         withCredentials: true,
       });
       setFormData(initialState);
-      await checkIsAuthenticated();
+      await updateAuthContext();
     } catch (e) {
       console.error("Login catch error", e);
       navigate("/error");
