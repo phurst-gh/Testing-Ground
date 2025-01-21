@@ -6,30 +6,33 @@ import LoginForm from "./LoginForm";
 import RegisterForm from "./RegisterForm";
 
 const TabButtonStyled = styled.button`
-  border: 1px solid #ccc;
   flex-grow: 1;
-  width: 40vw;
+  border: none;
   border-top-right-radius: 2px;
   border-bottom-right-radius: 2px;
   cursor: pointer;
+  width: 100%;
+  padding: 16px;
 `;
 
 const FormContainer = styled.div`
-  position: relative;
-  z-index: 1;
-  background: #ffffff;
   display: flex;
+  background: #ffffff;
   box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.2);
   border-radius: 12px;
   overflow: hidden;
 `;
 
 const Half = styled.div`
-  flex: 1;
   display: flex;
+  flex: 1;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+`;
+
+const FormHalf = styled(Half)`
+  padding: 16px;
 `;
 
 const LoginandRegister = () => {
@@ -42,9 +45,10 @@ const LoginandRegister = () => {
     navigate(`?type=${isLogin ? "register" : "login"}`);
   };
 
+
   return (
     <FormContainer>
-      <Half>{isLogin ? <LoginForm /> : <RegisterForm />}</Half>
+      <FormHalf>{isLogin ? <LoginForm /> : <RegisterForm />}</FormHalf>
       <Half>
         <TabButtonStyled onClick={handleToggle}>
           {isLogin ? 'Go to register' : 'Go to login'}

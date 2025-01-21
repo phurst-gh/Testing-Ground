@@ -6,6 +6,8 @@ import { useNavigate } from "react-router-dom";
 import { useAuth } from "@src/context/AuthContext";
 
 const FormStyled = styled.div`
+  width: 100%;
+  
   h3 {
     margin: 0 0 20px 0;
   }

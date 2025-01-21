@@ -19,7 +19,7 @@ const Home = () => {
 
   return (
     <GridContainer>
-      <GridChild start={3} end={8}>
+      <GridChild start={3} end={7}>
         {isAuthenticated ? <Dashboard /> : <Tabs />}
       </GridChild>
     </GridContainer>
