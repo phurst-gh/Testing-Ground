@@ -6,14 +6,13 @@ import { useNavigate } from "react-router-dom";
 import { useAuth } from "@src/context/AuthContext";
 
 const FormStyled = styled.div`
-  padding: 10px;
-  padding-left: 40px;
-  padding-right: 40px;
+  h3 {
+      margin: 0 0 20px 0;
+  }
 
   form {
     display: flex;
     flex-direction: column;
-    width: 100%;
 
     input {
       margin-bottom: 10px;
@@ -27,11 +26,14 @@ const FormStyled = styled.div`
 `;
 
 const initialState = {
+  firstName: "",
+  lastName: "",
   email: "",
   password: "",
+  passwordConfirm: "",
 };
 
-const LoginForm = () => {
+const RegisterForm = () => {
   const [formData, setFormData] = useState(initialState);
   const navigate = useNavigate();
   const { updateAuthContext } = useAuth();
@@ -44,26 +46,43 @@ const LoginForm = () => {
     }));
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
 
-    try {
-      await axios.post("/api/login", formData, {
-        withCredentials: true,
+    axios
+      .post("/api/register", formData)
+      .then(async () => {
+        setFormData(initialState);
+        await updateAuthContext();
+      })
+      .catch((error) => {
+        console.error("Login failed:", error);
+        navigate("/error");
       });
-      setFormData(initialState);
-      await updateAuthContext();
-    } catch (e) {
-      console.error("Login catch error", e);
-      navigate("/error");
-    }
   };
 
   return (
     <FormStyled>
-      <h3>Login</h3>
+      <h3>Register</h3>
 
       <form onSubmit={handleSubmit}>
+        <label htmlFor="firstName">First Name</label>
+        <input
+          type="text"
+          name="firstName"
+          value={formData.firstName}
+          onChange={handleInputChange}
+          required
+        />
+        <label htmlFor="lastName">Last Name</label>
+        <input
+          type="text"
+          name="lastName"
+          value={formData.lastName}
+          onChange={handleInputChange}
+          required
+        />
+
         <label htmlFor="email">Email</label>
         <input
           type="text"
@@ -82,10 +101,18 @@ const LoginForm = () => {
           required
         />
 
-        <button type="submit">Login</button>
+        <label htmlFor="password-confirm">Confirm Password</label>
+        <input
+          type="password"
+          name="passwordConfirm"
+          value={formData.passwordConfirm}
+          onChange={handleInputChange}
+          required
+        />
+        <button type="submit">Register</button>
       </form>
     </FormStyled>
   );
 };
 
-export default LoginForm;
+export default RegisterForm;

@@ -9,7 +9,7 @@ import {
 
 import Home from "./pages/Home";
 import Unauthenticated from "./pages/Unauthenticated";
-import PrivateRoute1 from "./pages/PrivateRoute1";
+import PrivateRoute1 from "./components/dashboard/Dashboard";
 import PrivateRoute2 from "./pages/PrivateRoute2";
 import UserProfilePage from "./pages/UserProfilePage";
 import { useAuth } from "./context/AuthContext";

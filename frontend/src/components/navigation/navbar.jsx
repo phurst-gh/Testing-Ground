@@ -3,10 +3,10 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 import { useAuth } from "@src/context/AuthContext";
-import RegisterForm from "@src/components/access/forms/RegisterForm";
-import LogoutButton from "@src/components/access/forms/LogoutButton";
+import RegisterForm from "@src/components/access/RegisterForm";
+import LogoutButton from "@src/components/access/LogoutButton";
 
-const Navbar = styled.nav`
+const NavbarStyled = styled.nav`
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -46,11 +46,11 @@ const NavLink = styled.a`
   }
 `;
 
-const NavbarComponent = () => {
+const Navbar = () => {
   const { isAuthenticated } = useAuth();
 
   return (
-    <Navbar>
+    <NavbarStyled>
       <Logo href="#">Brand</Logo>
       <NavList>
         <NavItem><NavLink href="#">Home</NavLink></NavItem>
@@ -59,8 +59,8 @@ const NavbarComponent = () => {
         <NavItem><NavLink href="#">Contact</NavLink></NavItem>
       </NavList>
       {isAuthenticated && <LogoutButton />}
-    </Navbar>
+    </NavbarStyled>
   );
 };
 
-export default NavbarComponent;
+export default Navbar;

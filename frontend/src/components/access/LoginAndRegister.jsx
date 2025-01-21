@@ -2,29 +2,8 @@ import React, { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
-import LoginForm from "./forms/LoginForm";
-import RegisterForm from "./forms/RegisterForm";
-
-const TabWrapper = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  margin-bottom: 10px;
-  height: 420px;
-  max-width: 96vw;
-`;
-
-const TabButtonWrapper = styled.div`
-  display: flex;
-`;
-
-const TabPanelStyled = styled.div`
-  background: white;
-  border: 1px solid #ccc;
-  width: 40vw;
-  border-top-left-radius: 2px;
-  border-bottom-left-radius: 2px;
-`;
+import LoginForm from "./LoginForm";
+import RegisterForm from "./RegisterForm";
 
 const TabButtonStyled = styled.button`
   border: 1px solid #ccc;
@@ -35,69 +14,44 @@ const TabButtonStyled = styled.button`
   cursor: pointer;
 `;
 
-const TabButton = ({ label, onClick, disabled }) => {
-  return (
-    <TabButtonStyled onClick={onClick} disabled={disabled}>
-      {label}
-    </TabButtonStyled>
-  );
-};
+const FormContainer = styled.div`
+  position: relative;
+  z-index: 1;
+  background: #ffffff;
+  display: flex;
+  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.2);
+  border-radius: 12px;
+  overflow: hidden;
+`;
 
-const TabPanel = ({ children }) => {
-  return <TabPanelStyled>{children}</TabPanelStyled>;
-};
+const Half = styled.div`
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`;
 
-const tabs = [
-  { text: "Or register", label: "register", content: <RegisterForm /> },
-  { text: "Or login", label: "login", content: <LoginForm /> },
-];
-
-const TabComponent = () => {
+const LoginandRegister = () => {
   const location = useLocation();
   const navigate = useNavigate();
+  const isLogin =
+    new URLSearchParams(location.search).get("type") !== "register";
 
-  const [activeLabel, setActiveLabel] = useState();
-
-  const handleTabClick = (label) => {
-    setActiveLabel(label);
-    navigate({
-      pathname: location.pathname,
-      search: `?tab=${encodeURIComponent(label)}`,
-    });
+  const handleToggle = () => {
+    navigate(`?type=${isLogin ? "register" : "login"}`);
   };
 
-  useEffect(() => {
-    const queryParams = new URLSearchParams(location.search);
-    const tabQuery = queryParams.get("tab");
-    if (tabQuery && tabs.some((tab) => tab.label === tabQuery)) {
-      setActiveLabel(tabQuery);
-    } else {
-      setActiveLabel(tabs[0].label);
-    }
-  }, [location.search, tabs]);
-
   return (
-    tabs && (
-      <TabWrapper>
-        <TabPanel>
-          {tabs.find((tab) => tab.label === activeLabel)?.content}
-        </TabPanel>
-
-        <TabButtonWrapper>
-          {tabs.map(
-            (tab, i) =>
-              activeLabel !== tab.label && (
-                <TabButton
-                  key={i}
-                  label={tab.label}
-                  onClick={() => handleTabClick(tab.label)}
-                />
-              )
-          )}
-        </TabButtonWrapper>
-      </TabWrapper>
-    )
+    <FormContainer>
+      <Half>{isLogin ? <LoginForm /> : <RegisterForm />}</Half>
+      <Half>
+        <TabButtonStyled onClick={handleToggle}>
+          {isLogin ? 'Go to register' : 'Go to login'}
+        </TabButtonStyled>
+      </Half>
+    </FormContainer>
   );
 };
 
-export default TabComponent;
+export default LoginandRegister;

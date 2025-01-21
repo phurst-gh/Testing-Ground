@@ -3,32 +3,26 @@ import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 import Tabs from "../components/access/LoginAndRegister";
+import Dashboard from "../components/dashboard/Dashboard";
+import { GridContainer, GridChild } from "../components/LayoutGrid";
 import { useAuth } from "../context/AuthContext";
-
-const HomeWrapper = styled.div`
-  display: flex;
-  height: 100vh;
-  justify-content: center;
-  align-items: center;
-`;
 
 const Home = () => {
   const { isAuthenticated } = useAuth();
   const navigate = useNavigate();
 
-  console.log('Home - isAuthenticated', isAuthenticated);
-
   useEffect(() => {
-    console.log('OOPS! Home - isAuthenticated', isAuthenticated);
     if (isAuthenticated) {
-      navigate('/pr1');
+      navigate("/pr1");
     }
   }, [isAuthenticated]);
 
   return (
-    <HomeWrapper>
-      <Tabs/>
-    </HomeWrapper>
+    <GridContainer>
+      <GridChild start={3} end={8}>
+        {isAuthenticated ? <Dashboard /> : <Tabs />}
+      </GridChild>
+    </GridContainer>
   );
 };
 export default Home;

@@ -1,5 +1,5 @@
 import React from "react";
-import NavBar from "../components/navigation/navbar";
+import NavBar from "../components/navigation/Navbar";
 
 const UserProfilePage = () => (
   <>

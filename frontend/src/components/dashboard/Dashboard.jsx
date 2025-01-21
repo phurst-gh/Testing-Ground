@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import Navbar from "../navigation/Navbar";
 
 const HeroSection = styled.div`
   background: linear-gradient(135deg, #6a11cb, #2575fc);
@@ -37,6 +38,7 @@ const Card = styled.div`
   &:hover {
     transform: translateY(-5px);
     box-shadow: 0 8px 12px rgba(0, 0, 0, 0.15);
+    cursor: pointer;
   }
 `;
 
@@ -59,21 +61,24 @@ const Homepage = () => {
   ];
 
   return (
-    <div>
-      <HeroSection>
-        <HeroTitle>Welcome to Testing Grounds</HeroTitle>
-        <HeroSubtitle>Explore features and functionality</HeroSubtitle>
-      </HeroSection>
+    <>
+      <Navbar />
+      <div>
+        <HeroSection>
+          <HeroTitle>Welcome to Testing Grounds</HeroTitle>
+          <HeroSubtitle>Explore features and functionality</HeroSubtitle>
+        </HeroSection>
 
-      <CardGrid>
-        {cards.map((card, index) => (
-          <Card key={index}>
-            <CardTitle>{card.title}</CardTitle>
-            <CardContent>{card.content}</CardContent>
-          </Card>
-        ))}
-      </CardGrid>
-    </div>
+        <CardGrid>
+          {cards.map((card, index) => (
+            <Card key={index}>
+              <CardTitle>{card.title}</CardTitle>
+              <CardContent>{card.content}</CardContent>
+            </Card>
+          ))}
+        </CardGrid>
+      </div>
+    </>
   );
 };
 
