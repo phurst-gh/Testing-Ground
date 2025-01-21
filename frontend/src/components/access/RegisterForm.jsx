@@ -5,6 +5,64 @@ import { useNavigate } from "react-router-dom";
 
 import { useAuth } from "@src/context/AuthContext";
 
+export const Label = styled.label`
+  display: block;
+  font-size: 14px;
+  font-weight: 500;
+  color: #333;
+  margin-bottom: 8px;
+`;
+
+export const Input = styled.input`
+  display: block;
+  padding: 12px;
+  margin-bottom: 10px;
+  font-size: 16px;
+  color: #333;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: #fff;
+  outline: none;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+
+  &:hover {
+    border-color: #999;
+  }
+
+  &:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 6px rgba(0, 123, 255, 0.5);
+  }
+`;
+
+export const Button = styled.button`
+  display: inline-block;
+  padding: 12px;
+  margin-top: 20px;
+  font-size: 16px;
+  font-weight: 600;
+  color: #fff;
+  background-color: #007bff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  text-align: center;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+
+  &:hover {
+    background-color: #0056b3;
+  }
+
+  &:active {
+    transform: scale(0.98);
+  }
+
+  &:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+  }
+`;
+
 const FormStyled = styled.div`
   width: 100%;
 
@@ -15,15 +73,6 @@ const FormStyled = styled.div`
   form {
     display: flex;
     flex-direction: column;
-
-    input {
-      margin-bottom: 10px;
-    }
-
-    button {
-      margin-top: 10px;
-      padding: 8px;
-    }
   }
 `;
 
@@ -68,16 +117,16 @@ const RegisterForm = () => {
       <h3>Register</h3>
 
       <form onSubmit={handleSubmit}>
-        <label htmlFor="firstName">First Name</label>
-        <input
+        <Label htmlFor="firstName">First Name</Label>
+        <Input
           type="text"
           name="firstName"
           value={formData.firstName}
           onChange={handleInputChange}
           required
         />
-        <label htmlFor="lastName">Last Name</label>
-        <input
+        <Label htmlFor="lastName">Last Name</Label>
+        <Input
           type="text"
           name="lastName"
           value={formData.lastName}
@@ -85,8 +134,8 @@ const RegisterForm = () => {
           required
         />
 
-        <label htmlFor="email">Email</label>
-        <input
+        <Label htmlFor="email">Email</Label>
+        <Input
           type="text"
           name="email"
           value={formData.email}
@@ -94,8 +143,8 @@ const RegisterForm = () => {
           required
         />
 
-        <label htmlFor="password">Password</label>
-        <input
+        <Label htmlFor="password">Password</Label>
+        <Input
           type="password"
           name="password"
           value={formData.password}
@@ -103,15 +152,15 @@ const RegisterForm = () => {
           required
         />
 
-        <label htmlFor="password-confirm">Confirm Password</label>
-        <input
+        <Label htmlFor="password-confirm">Confirm Password</Label>
+        <Input
           type="password"
           name="passwordConfirm"
           value={formData.passwordConfirm}
           onChange={handleInputChange}
           required
         />
-        <button type="submit">Register</button>
+        <Button type="submit">Register</Button>
       </form>
     </FormStyled>
   );

@@ -5,6 +5,36 @@ import { useNavigate } from "react-router-dom";
 
 import { useAuth } from "@src/context/AuthContext";
 
+const Label = styled.label`
+  display: block;
+  font-size: 14px;
+  font-weight: 500;
+  color: #333;
+  margin-bottom: 8px;
+`;
+
+const Input = styled.input`
+  display: block;
+  padding: 12px;
+  margin-bottom: 10px;
+  font-size: 16px;
+  color: #333;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: #fff;
+  outline: none;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+
+  &:hover {
+    border-color: #999;
+  }
+
+  &:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 6px rgba(0, 123, 255, 0.5);
+  }
+`;
+
 const FormStyled = styled.div`
   width: 100%;
   
@@ -15,15 +45,34 @@ const FormStyled = styled.div`
   form {
     display: flex;
     flex-direction: column;
+  }
+`;
 
-    input {
-      margin-bottom: 10px;
-    }
+const Button = styled.button`
+  display: inline-block;
+  padding: 12px;
+  margin-top: 20px;
+  font-size: 16px;
+  font-weight: 600;
+  color: #fff;
+  background-color: #007bff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  text-align: center;
+  transition: background-color 0.3s ease, transform 0.2s ease;
 
-    button {
-      margin-top: 10px;
-      padding: 8px;
-    }
+  &:hover {
+    background-color: #0056b3;
+  }
+
+  &:active {
+    transform: scale(0.98);
+  }
+
+  &:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
   }
 `;
 
@@ -65,8 +114,8 @@ const LoginForm = () => {
       <h3>Login</h3>
 
       <form onSubmit={handleSubmit}>
-        <label htmlFor="email">Email</label>
-        <input
+        <Label htmlFor="email">Email</Label>
+        <Input
           type="text"
           name="email"
           value={formData.email}
@@ -74,8 +123,8 @@ const LoginForm = () => {
           required
         />
 
-        <label htmlFor="password">Password</label>
-        <input
+        <Label htmlFor="password">Password</Label>
+        <Input
           type="password"
           name="password"
           value={formData.password}
@@ -83,7 +132,7 @@ const LoginForm = () => {
           required
         />
 
-        <button type="submit">Login</button>
+        <Button type="submit">Login</Button>
       </form>
     </FormStyled>
   );
